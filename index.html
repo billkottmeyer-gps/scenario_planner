@@ -60,6 +60,33 @@ input[type=range]{width:100%;accent-color:#2563eb;margin-top:4px}
 .shift-badge{background:#dcfce7;color:#15803d;font-size:14px;font-weight:700;padding:6px 14px;border-radius:20px;margin-top:14px}
 .shift-badge.neg{background:#fee2e2;color:#b91c1c}
 .error-msg{background:#fee2e2;color:#991b1b;padding:16px 20px;border-radius:8px;margin:24px 0;font-size:13px}
+.comp-card{background:white;border:0.5px solid #e5e7eb;border-radius:10px;padding:20px;margin-top:20px}
+.comp-hdr{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.comp-title{font-size:14px;font-weight:600;color:#374151}
+.comp-note{font-size:11px;color:#9ca3af;line-height:1.5;margin-bottom:14px}
+.comp-tbl{width:100%;border-collapse:collapse;table-layout:fixed}
+.comp-tbl th{font-size:11px;font-weight:500;color:#9ca3af;text-transform:uppercase;letter-spacing:.05em;padding:0 10px 10px;text-align:center}
+.comp-tbl th:first-child{text-align:left;padding-left:0;width:22%}
+.comp-tbl td{padding:10px;border-top:0.5px solid #f3f4f6;text-align:center;vertical-align:middle}
+.comp-tbl td:first-child{text-align:left;padding-left:0}
+.comp-tbl .col-sep{border-left:0.5px solid #e5e7eb}
+.ch-name{font-size:13px;font-weight:500;color:#111827}
+.ch-sub{font-size:11px;color:#9ca3af;margin-top:2px}
+.seat-row{display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:wrap}
+.sd{font-size:14px;font-weight:500;color:#185FA5}
+.sr{font-size:14px;font-weight:500;color:#A32D2D}
+.si{font-size:14px;font-weight:500;color:#888780}
+.ss{font-size:12px;color:#9ca3af}
+.bar-w{width:100%;height:5px;background:#fee2e2;border-radius:3px;margin-top:5px;overflow:hidden;display:flex}
+.bar-d{height:100%;background:#185FA5}
+.bar-i{height:100%;background:#c4c3bc}
+.pct-lbl{font-size:11px;color:#9ca3af;margin-top:3px;text-align:center}
+.cdp{background:#dcfce7;color:#15803d;font-size:12px;font-weight:600;padding:2px 8px;border-radius:5px;display:inline-block;min-width:56px}
+.cdn{background:#fee2e2;color:#b91c1c;font-size:12px;font-weight:600;padding:2px 8px;border-radius:5px;display:inline-block;min-width:56px}
+.cdn0{background:#f3f4f6;color:#6b7280;font-size:12px;font-weight:500;padding:2px 8px;border-radius:5px;display:inline-block;min-width:56px}
+.comp-legend{display:flex;align-items:center;gap:16px;margin-top:12px;padding-top:10px;border-top:0.5px solid #f3f4f6;flex-wrap:wrap}
+.cl-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#9ca3af}
+.cl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -78,6 +105,7 @@ input[type=range]{width:100%;accent-color:#2563eb;margin-top:4px}
 <main id="app">
   <div class="loading">Loading voter data…</div>
 </main>
+<div id="compSection" style="max-width:1400px;margin:0 auto;padding:0 32px 32px"></div>
 
 <script>
 const STATE_NAMES = {
@@ -192,6 +220,7 @@ function setState(val) {
   const name = STATE_NAMES[val] || val
   document.getElementById("pageTitle").textContent = `${name} Election Scenario Tool`
   renderApp()
+  renderComposition()
 }
 
 // ─── Render ───────────────────────────────────────────────────────────────────
@@ -293,31 +322,137 @@ function renderApp() {
   }
 }
 
-function selectScenario(name) { selectedScenario=name; renderApp() }
+function selectScenario(name) { selectedScenario=name; renderApp(); renderComposition() }
 function setDistrict(val)     { districtFilter=val; document.getElementById("resultsCard").innerHTML=renderResults() }
 function setRace(val)         { raceFilter=val; document.getElementById("resultsCard").innerHTML=renderResults() }
-function setMultiplier(val)   { multiplier=val/100; document.getElementById("multLabel").textContent=val+"%"; document.getElementById("resultsCard").innerHTML=renderResults() }
+function setMultiplier(val)   { multiplier=val/100; document.getElementById("multLabel").textContent=val+"%"; document.getElementById("resultsCard").innerHTML=renderResults(); renderComposition() }
+
+// ─── Composition data (loaded from composition.json) ─────────────────────────
+let COMPOSITION = {}
+
+// ─── Seat projection per chamber (ignores district/race filters) ──────────────
+function projectSeats(chamber, scenarioName, mult) {
+  const rows = ALL_DATA.filter(r => r.state === selectedState && r.chamber === chamber && r.district && r.district !== "Not Available")
+  const scenario = SCENARIOS[scenarioName]
+  const districts = {}
+  for (const row of rows) {
+    const tMap = SCORE_MAP[row.tScore], sMap = SCORE_MAP[row.sScore]
+    if (!tMap || !sMap) continue
+    if (!districts[row.district]) districts[row.district] = {adjDem:0, adjRep:0}
+    const initT = row.count * tMap.midpoint
+    const initD = initT * sMap.midpoint
+    const tD = (scenario.Turnout[tMap.turnout]?.[sMap.partisan] ?? 0) * mult
+    const sD = (scenario.Support[tMap.turnout]?.[sMap.partisan] ?? 0) * mult
+    const adjT = initT * (1 + tD)
+    const adjD = ((initD / initT) + sD) * adjT
+    districts[row.district].adjDem += adjD
+    districts[row.district].adjRep += (adjT - adjD)
+  }
+  return Object.values(districts).filter(d => d.adjDem > d.adjRep).length
+}
+
+// ─── Render composition scoreboard ───────────────────────────────────────────
+function renderComposition() {
+  const comp = COMPOSITION[selectedState]
+  const el = document.getElementById("compSection")
+  if (!el) return
+  if (!comp) { el.innerHTML = ""; return }
+
+  const chambers = [
+    { key:"CD", label:"Congressional districts", sub:`${comp.CD?.total||0} total seats` },
+    { key:"SS", label:"State senate",            sub:`${comp.SS?.total||0} total seats` },
+    { key:"SH", label:"State house",             sub:`${comp.SH?.total||0} total seats` }
+  ].filter(c => comp[c.key])
+
+  function seatBar(d, r, i, total) {
+    const dp = total > 0 ? (d/total*100).toFixed(1) : 0
+    const ip = total > 0 ? (i/total*100).toFixed(1) : 0
+    return `<div class="bar-w"><div class="bar-d" style="width:${dp}%"></div><div class="bar-i" style="width:${ip}%"></div></div>`
+  }
+
+  function seatBadge(delta) {
+    if (delta > 0) return `<span class="cdp">+${delta} seats</span>`
+    if (delta < 0) return `<span class="cdn">${delta} seats</span>`
+    return `<span class="cdn0">+0 seats</span>`
+  }
+
+  function currentCell(c) {
+    const {d,r,i,total} = c
+    const parts = [`<span class="sd">${d}D</span><span class="ss">/</span><span class="sr">${r}R</span>`]
+    if (i > 0) parts.push(`<span class="ss">/</span><span class="si">${i}I</span>`)
+    const pct = total > 0 ? (d/total*100).toFixed(1) : 0
+    return `<div class="seat-row">${parts.join("")}</div>${seatBar(d,r,i,total)}<div class="pct-lbl">${pct}% Dem${i>0?" · "+i+" Ind":""}</div>`
+  }
+
+  function modelCell(projD, total, showDelta, currentD) {
+    const projR = total - projD
+    const pct = total > 0 ? (projD/total*100).toFixed(1) : 0
+    const bar = `<div class="bar-w"><div class="bar-d" style="width:${pct}%"></div></div>`
+    if (showDelta) {
+      return `<div class="seat-row"><span class="sd">${projD}D</span><span class="ss">/</span><span class="sr">${projR}R</span></div>${bar}<div style="margin-top:4px">${seatBadge(projD - currentD)}</div>`
+    }
+    return `<div class="seat-row"><span class="sd">${projD}D</span><span class="ss">/</span><span class="sr">${projR}R</span></div>${bar}<div class="pct-lbl">${pct}% Dem</div>`
+  }
+
+  const rows = chambers.map(c => {
+    const cv = comp[c.key]
+    const baseSeats = projectSeats(c.key, "Baseline", 1.0)
+    const projSeats = projectSeats(c.key, selectedScenario, multiplier)
+    return `<tr>
+      <td><div class="ch-name">${c.label}</div><div class="ch-sub">${c.sub}</div></td>
+      <td>${currentCell(cv)}</td>
+      <td class="col-sep">${modelCell(baseSeats, cv.total, false, cv.d)}</td>
+      <td class="col-sep">${modelCell(projSeats, cv.total, true, cv.d)}</td>
+    </tr>`
+  }).join("")
+
+  el.innerHTML = `<div class="comp-card">
+    <div class="comp-hdr">
+      <span class="comp-title">Partisan seat composition</span>
+      <span class="scenario-badge">${selectedScenario} · ${Math.round(multiplier*100)}% multiplier</span>
+    </div>
+    <div class="comp-note">
+      Current composition from NCSL. Baseline and projected use all statewide voter data — district and race/ethnicity filters do not apply here. Win threshold: D &gt; 50% of two-party vote per district. <strong>Model does not include votes cast for independent candidates — independent seats shown in current composition only.</strong>
+    </div>
+    <table class="comp-tbl">
+      <thead><tr>
+        <th></th>
+        <th>Current (NCSL)</th>
+        <th class="col-sep">Baseline model</th>
+        <th class="col-sep">Projected · Delta vs current</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div class="comp-legend">
+      <div class="cl-item"><div class="cl-dot" style="background:#185FA5"></div> Democrat</div>
+      <div class="cl-item"><div class="cl-dot" style="background:#A32D2D"></div> Republican</div>
+      <div class="cl-item"><div class="cl-dot" style="background:#c4c3bc"></div> Independent (current only)</div>
+      <div class="cl-item" style="margin-left:auto;font-size:11px;color:#9ca3af">Source: NCSL · updated ${comp._updated||""}</div>
+    </div>
+  </div>`
+}
 
 // ─── Boot ─────────────────────────────────────────────────────────────────────
-fetch("voter-model/src/data/voter_model.json")
-  .then(res => { if(!res.ok) throw new Error(`HTTP ${res.status}`); return res.json() })
-  .then(data => {
-    ALL_DATA = data.filter(r => r.district && r.district !== "Not Available")
+Promise.all([
+  fetch("voter-model/src/data/voter_model.json").then(r => { if(!r.ok) throw new Error(`voter_model.json: HTTP ${r.status}`); return r.json() }),
+  fetch("voter-model/src/data/composition.json").then(r => { if(!r.ok) throw new Error(`composition.json: HTTP ${r.status}`); return r.json() })
+])
+  .then(([voterData, compData]) => {
+    ALL_DATA = voterData.filter(r => r.district && r.district !== "Not Available")
+    COMPOSITION = compData
     const states = availableStates()
     selectedState = states[0] || ""
     buildStatePicker()
     const name = STATE_NAMES[selectedState] || selectedState
     document.getElementById("pageTitle").textContent = `${name} Election Scenario Tool`
     renderApp()
+    renderComposition()
   })
   .catch(err => {
     document.getElementById("app").innerHTML = `
       <div class="error-msg">
-        <strong>Could not load voter data.</strong><br><br>
-        Expected file at: <code>voter-model/src/data/voter_model.json</code><br><br>
-        This file is generated automatically when you push CSV exports to
-        <code>voter-model/data/raw/</code>. Make sure you have uploaded your
-        TargetSmart exports and that the GitHub Action has finished running.<br><br>
+        <strong>Could not load data.</strong><br><br>
+        Expected files at: <code>voter-model/src/data/voter_model.json</code> and <code>voter-model/src/data/composition.json</code><br><br>
         Details: ${err.message}
       </div>`
   })
