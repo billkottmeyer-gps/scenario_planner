@@ -19,6 +19,7 @@ const CHAMBER_HEADERS = {
   "Geography/Registration Address/Voter File State House District":   "SH"
 }
 
+const STATE_HEADER         = "Geography/Registration Address/Voter File Source State"
 const RACE_HEADER          = "Demographics/Individual/Ethnicity/VoterBase Race"
 const TURNOUT_SCORE_HEADER = "Voting/Voting Behavior/TSP - Mid-Term General Turnout Score Bucket"
 const SUPPORT_SCORE_HEADER = "Issues/Modeled/TSP - Partisan Score Bucket"
@@ -82,7 +83,7 @@ function processFile(filePath, state) {
     const count = parseCount(row[COUNT_HEADER])
     if (!count) { skipped++; continue }
     rows.push({
-      state:    state.toUpperCase(),
+      state:    (row[STATE_HEADER] || state).toUpperCase().trim(),
       chamber:  chamber,
       district: normalizeDistrict(row[districtCol]),
       race:     extractRaceCode(row[RACE_HEADER]),
