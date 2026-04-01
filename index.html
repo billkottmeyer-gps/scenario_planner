@@ -3,17 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mississippi Election Scenario Tool</title>
+<title>Election Scenario Tool</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f3f4f6;color:#111827}
-header{background:#0d1b3e;padding:20px 32px;color:white}
+header{background:#0d1b3e;padding:20px 32px;color:white;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 header h1{font-size:22px;font-weight:600;margin-bottom:4px}
 header p{font-size:13px;color:#94a3b8}
+.state-picker{display:flex;align-items:center;gap:10px}
+.state-picker label{font-size:13px;color:#94a3b8;white-space:nowrap}
+.state-picker select{padding:7px 12px;border:1px solid #334155;border-radius:6px;font-size:14px;font-weight:600;background:#1e3a5f;color:white;cursor:pointer;outline:none}
 main{padding:24px 32px;max-width:1400px;margin:0 auto}
 .loading{text-align:center;padding:80px;color:#6b7280;font-size:15px}
 .section-label{font-size:13px;font-weight:500;color:#6b7280;margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em}
 .scenario-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px}
+@media(max-width:1100px){.scenario-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.scenario-grid{grid-template-columns:repeat(2,1fr)}}
 .scenario-card{background:white;border:1.5px solid #e5e7eb;border-radius:10px;padding:16px;cursor:pointer;transition:border-color .15s,background .15s}
 .scenario-card:hover{border-color:#93c5fd}
 .scenario-card.active{border-color:#2563eb;background:#eff6ff}
@@ -23,6 +28,7 @@ main{padding:24px 32px;max-width:1400px;margin:0 auto}
 .lean-partial{color:#0891b2}.lean-mixed{color:#7c3aed}.lean-turnout{color:#059669}.lean-slight{color:#0d9488}
 .scenario-card p{font-size:12px;color:#6b7280;line-height:1.4}
 .bottom-panel{display:grid;grid-template-columns:300px 1fr;gap:20px}
+@media(max-width:900px){.bottom-panel{grid-template-columns:1fr}}
 .filters-card{background:white;border:1px solid #e5e7eb;border-radius:10px;padding:20px}
 .filters-card h2{font-size:14px;font-weight:600;color:#374151;margin-bottom:16px}
 .filter-group{margin-bottom:16px}
@@ -43,9 +49,8 @@ input[type=range]{width:100%;accent-color:#2563eb;margin-top:4px}
 .results-table td:first-child{font-weight:600;color:#111827;font-size:14px}
 .results-table td.num{text-align:right;color:#374151}
 .results-table td.bold-num{text-align:right;font-weight:700;color:#111827}
-.delta-pos{background:#dcfce7;color:#15803d;font-size:13px;font-weight:600;padding:3px 8px;border-radius:5px;display:inline-block;min-width:70px;text-align:center}
-.delta-neg{background:#fee2e2;color:#b91c1c;font-size:13px;font-weight:600;padding:3px 8px;border-radius:5px;display:inline-block;min-width:70px;text-align:center}
-.delta-neu{background:#dcfce7;color:#15803d;font-size:13px;font-weight:600;padding:3px 8px;border-radius:5px;display:inline-block;min-width:70px;text-align:center}
+.delta-pos{background:#dcfce7;color:#15803d;font-size:13px;font-weight:600;padding:3px 8px;border-radius:5px;display:inline-block;min-width:72px;text-align:center}
+.delta-neg{background:#fee2e2;color:#b91c1c;font-size:13px;font-weight:600;padding:3px 8px;border-radius:5px;display:inline-block;min-width:72px;text-align:center}
 .delta-cell{text-align:right}
 .stats-row{display:flex;gap:32px;align-items:center;padding-top:16px;border-top:1px solid #f3f4f6;flex-wrap:wrap}
 .stat{display:flex;flex-direction:column;gap:2px}
@@ -59,29 +64,48 @@ input[type=range]{width:100%;accent-color:#2563eb;margin-top:4px}
 </head>
 <body>
 <header>
-  <h1>Mississippi Election Scenario Tool</h1>
-  <p>Model how different political environments affect projected vote totals across Mississippi</p>
+  <div>
+    <h1 id="pageTitle">Election Scenario Tool</h1>
+    <p>Model how different political environments affect projected vote totals</p>
+  </div>
+  <div class="state-picker">
+    <label>State</label>
+    <select id="statePicker" onchange="setState(this.value)">
+      <option value="">Loading…</option>
+    </select>
+  </div>
 </header>
 <main id="app">
   <div class="loading">Loading voter data…</div>
 </main>
 
 <script>
-// ─── Score lookup ─────────────────────────────────────────────────────────────
-const SCORE_MAP = {
-  "0-9.9":   {midpoint:0.05, partisan:"GOP Base",  turnout:"New/Never"},
-  "10-19.9": {midpoint:0.15, partisan:"GOP Base",  turnout:"Rare"},
-  "20-29.9": {midpoint:0.25, partisan:"Lean GOP",  turnout:"Rare"},
-  "30-39.9": {midpoint:0.35, partisan:"Lean GOP",  turnout:"Rare"},
-  "40-49.9": {midpoint:0.45, partisan:"Swing",     turnout:"Sometimes"},
-  "50-59.9": {midpoint:0.55, partisan:"Swing",     turnout:"Sometimes"},
-  "60-69.9": {midpoint:0.65, partisan:"Lean D",    turnout:"Sometimes"},
-  "70-79.9": {midpoint:0.75, partisan:"Lean D",    turnout:"Super"},
-  "80-89.9": {midpoint:0.85, partisan:"Dem Base",  turnout:"Super"},
-  "90-100":  {midpoint:0.95, partisan:"Dem Base",  turnout:"Super Super"}
+const STATE_NAMES = {
+  AL:"Alabama",AK:"Alaska",AZ:"Arizona",AR:"Arkansas",CA:"California",
+  CO:"Colorado",CT:"Connecticut",DE:"Delaware",FL:"Florida",GA:"Georgia",
+  HI:"Hawaii",ID:"Idaho",IL:"Illinois",IN:"Indiana",IA:"Iowa",
+  KS:"Kansas",KY:"Kentucky",LA:"Louisiana",ME:"Maine",MD:"Maryland",
+  MA:"Massachusetts",MI:"Michigan",MN:"Minnesota",MS:"Mississippi",MO:"Missouri",
+  MT:"Montana",NE:"Nebraska",NV:"Nevada",NH:"New Hampshire",NJ:"New Jersey",
+  NM:"New Mexico",NY:"New York",NC:"North Carolina",ND:"North Dakota",OH:"Ohio",
+  OK:"Oklahoma",OR:"Oregon",PA:"Pennsylvania",RI:"Rhode Island",SC:"South Carolina",
+  SD:"South Dakota",TN:"Tennessee",TX:"Texas",UT:"Utah",VT:"Vermont",
+  VA:"Virginia",WA:"Washington",WV:"West Virginia",WI:"Wisconsin",WY:"Wyoming"
 }
 
-// ─── Scenario definitions ─────────────────────────────────────────────────────
+const SCORE_MAP = {
+  "0-9.9":   {midpoint:0.05,partisan:"GOP Base", turnout:"New/Never"},
+  "10-19.9": {midpoint:0.15,partisan:"GOP Base", turnout:"Rare"},
+  "20-29.9": {midpoint:0.25,partisan:"Lean GOP", turnout:"Rare"},
+  "30-39.9": {midpoint:0.35,partisan:"Lean GOP", turnout:"Rare"},
+  "40-49.9": {midpoint:0.45,partisan:"Swing",    turnout:"Sometimes"},
+  "50-59.9": {midpoint:0.55,partisan:"Swing",    turnout:"Sometimes"},
+  "60-69.9": {midpoint:0.65,partisan:"Lean D",   turnout:"Sometimes"},
+  "70-79.9": {midpoint:0.75,partisan:"Lean D",   turnout:"Super"},
+  "80-89.9": {midpoint:0.85,partisan:"Dem Base", turnout:"Super"},
+  "90-100":  {midpoint:0.95,partisan:"Dem Base", turnout:"Super Super"}
+}
+
 const SCENARIO_META = {
   "Blue Flood":                     {lean:"DEM",          cls:"lean-dem",     desc:"High base turnout + support swing from even GOP-leaners"},
   "Red Wall":                       {lean:"GOP",          cls:"lean-gop",     desc:"Collapse in Dem turnout + heavy GOP swing"},
@@ -96,77 +120,84 @@ const SCENARIO_META = {
 const SCENARIOS = {"Baseline":{"Turnout":{"New/Never":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Rare":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Sometimes":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Super":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Super Super":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0}},"Support":{"New/Never":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Rare":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Sometimes":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Super":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Super Super":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0}}},"Blue Flood":{"Turnout":{"New/Never":{"GOP Base":-0.02,"Lean GOP":0,"Swing":0.03,"Lean D":0.04,"Dem Base":0.05},"Rare":{"GOP Base":-0.02,"Lean GOP":0,"Swing":0.03,"Lean D":0.04,"Dem Base":0.05},"Sometimes":{"GOP Base":-0.02,"Lean GOP":0,"Swing":0.02,"Lean D":0.04,"Dem Base":0.05},"Super":{"GOP Base":-0.01,"Lean GOP":0,"Swing":0.02,"Lean D":0.03,"Dem Base":0.04},"Super Super":{"GOP Base":-0.01,"Lean GOP":0,"Swing":0.01,"Lean D":0.02,"Dem Base":0.03}},"Support":{"New/Never":{"GOP Base":0.03,"Lean GOP":0.05,"Swing":0.05,"Lean D":0.05,"Dem Base":0.07},"Rare":{"GOP Base":0.03,"Lean GOP":0.05,"Swing":0.04,"Lean D":0.05,"Dem Base":0.07},"Sometimes":{"GOP Base":0.03,"Lean GOP":0.05,"Swing":0.04,"Lean D":0.05,"Dem Base":0.07},"Super":{"GOP Base":0.02,"Lean GOP":0.04,"Swing":0.03,"Lean D":0.04,"Dem Base":0.05},"Super Super":{"GOP Base":0.02,"Lean GOP":0.04,"Swing":0.02,"Lean D":0.04,"Dem Base":0.05}}},"Red Wall":{"Turnout":{"New/Never":{"GOP Base":0.02,"Lean GOP":0,"Swing":-0.03,"Lean D":-0.04,"Dem Base":-0.05},"Rare":{"GOP Base":0.02,"Lean GOP":0,"Swing":-0.03,"Lean D":-0.04,"Dem Base":-0.05},"Sometimes":{"GOP Base":0.02,"Lean GOP":0,"Swing":-0.02,"Lean D":-0.04,"Dem Base":-0.05},"Super":{"GOP Base":0.01,"Lean GOP":0,"Swing":-0.02,"Lean D":-0.03,"Dem Base":-0.04},"Super Super":{"GOP Base":0.01,"Lean GOP":0,"Swing":-0.01,"Lean D":-0.02,"Dem Base":-0.03}},"Support":{"New/Never":{"GOP Base":-0.03,"Lean GOP":-0.05,"Swing":-0.05,"Lean D":-0.05,"Dem Base":-0.07},"Rare":{"GOP Base":-0.03,"Lean GOP":-0.05,"Swing":-0.04,"Lean D":-0.05,"Dem Base":-0.07},"Sometimes":{"GOP Base":-0.03,"Lean GOP":-0.05,"Swing":-0.04,"Lean D":-0.05,"Dem Base":-0.07},"Super":{"GOP Base":-0.02,"Lean GOP":-0.04,"Swing":-0.03,"Lean D":-0.04,"Dem Base":-0.05},"Super Super":{"GOP Base":-0.02,"Lean GOP":-0.04,"Swing":-0.02,"Lean D":-0.04,"Dem Base":-0.05}}},"Even Split":{"Turnout":{"New/Never":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Rare":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Sometimes":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Super":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Super Super":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0}},"Support":{"New/Never":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Rare":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Sometimes":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Super":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Super Super":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0}}},"GOP Backlash":{"Turnout":{"New/Never":{"GOP Base":0.03,"Lean GOP":0.02,"Swing":0.02,"Lean D":0.01,"Dem Base":0.01},"Rare":{"GOP Base":0.03,"Lean GOP":0.02,"Swing":0.02,"Lean D":0.01,"Dem Base":0.01},"Sometimes":{"GOP Base":0.03,"Lean GOP":0.02,"Swing":0.01,"Lean D":0.01,"Dem Base":0.01},"Super":{"GOP Base":0.02,"Lean GOP":0.01,"Swing":0,"Lean D":0.01,"Dem Base":0.01},"Super Super":{"GOP Base":0.02,"Lean GOP":0.01,"Swing":0,"Lean D":0.01,"Dem Base":0.01}},"Support":{"New/Never":{"GOP Base":0.04,"Lean GOP":0.03,"Swing":0.03,"Lean D":0.01,"Dem Base":0},"Rare":{"GOP Base":0.04,"Lean GOP":0.03,"Swing":0.03,"Lean D":0.01,"Dem Base":0},"Sometimes":{"GOP Base":0.04,"Lean GOP":0.03,"Swing":0.03,"Lean D":0.01,"Dem Base":0},"Super":{"GOP Base":0.04,"Lean GOP":0.03,"Swing":0.02,"Lean D":0.01,"Dem Base":0},"Super Super":{"GOP Base":0.03,"Lean GOP":0.02,"Swing":0.02,"Lean D":0.01,"Dem Base":0}}},"Dem Wave, GOP Hold":{"Turnout":{"New/Never":{"GOP Base":0,"Lean GOP":0,"Swing":0.03,"Lean D":0.04,"Dem Base":0.05},"Rare":{"GOP Base":0,"Lean GOP":0,"Swing":0.03,"Lean D":0.04,"Dem Base":0.05},"Sometimes":{"GOP Base":0,"Lean GOP":0,"Swing":0.03,"Lean D":0.04,"Dem Base":0.05},"Super":{"GOP Base":0,"Lean GOP":0,"Swing":0.03,"Lean D":0.04,"Dem Base":0.04},"Super Super":{"GOP Base":0,"Lean GOP":0,"Swing":0.03,"Lean D":0.04,"Dem Base":0.04}},"Support":{"New/Never":{"GOP Base":0,"Lean GOP":0,"Swing":0.02,"Lean D":0.03,"Dem Base":0.03},"Rare":{"GOP Base":0,"Lean GOP":0,"Swing":0.02,"Lean D":0.03,"Dem Base":0.03},"Sometimes":{"GOP Base":0,"Lean GOP":0,"Swing":0.02,"Lean D":0.03,"Dem Base":0.03},"Super":{"GOP Base":0,"Lean GOP":0,"Swing":0.02,"Lean D":0.03,"Dem Base":0.03},"Super Super":{"GOP Base":0,"Lean GOP":0,"Swing":0.02,"Lean D":0.03,"Dem Base":0.03}}},"Partisan Surge, Infrequent Drop":{"Turnout":{"New/Never":{"GOP Base":-0.03,"Lean GOP":-0.03,"Swing":-0.03,"Lean D":-0.03,"Dem Base":-0.03},"Rare":{"GOP Base":-0.03,"Lean GOP":-0.03,"Swing":-0.03,"Lean D":-0.03,"Dem Base":-0.03},"Sometimes":{"GOP Base":-0.02,"Lean GOP":-0.02,"Swing":-0.02,"Lean D":-0.02,"Dem Base":-0.02},"Super":{"GOP Base":0.02,"Lean GOP":0.02,"Swing":0.02,"Lean D":0.02,"Dem Base":0.02},"Super Super":{"GOP Base":0.02,"Lean GOP":0.02,"Swing":0.02,"Lean D":0.02,"Dem Base":0.02}},"Support":{"New/Never":{"GOP Base":-0.03,"Lean GOP":-0.02,"Swing":0.01,"Lean D":0.03,"Dem Base":0.05},"Rare":{"GOP Base":-0.03,"Lean GOP":-0.02,"Swing":0.01,"Lean D":0.03,"Dem Base":0.05},"Sometimes":{"GOP Base":-0.03,"Lean GOP":-0.02,"Swing":0.01,"Lean D":0.03,"Dem Base":0.05},"Super":{"GOP Base":-0.03,"Lean GOP":-0.02,"Swing":0.01,"Lean D":0.03,"Dem Base":0.05},"Super Super":{"GOP Base":-0.03,"Lean GOP":-0.02,"Swing":0.01,"Lean D":0.03,"Dem Base":0.05}}},"Polarized High Turnout":{"Turnout":{"New/Never":{"GOP Base":0.02,"Lean GOP":0.01,"Swing":0,"Lean D":0.01,"Dem Base":0.02},"Rare":{"GOP Base":0.02,"Lean GOP":0.01,"Swing":0,"Lean D":0.01,"Dem Base":0.02},"Sometimes":{"GOP Base":0.02,"Lean GOP":0.01,"Swing":0,"Lean D":0.01,"Dem Base":0.02},"Super":{"GOP Base":0.01,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0.01},"Super Super":{"GOP Base":0.01,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0.01}},"Support":{"New/Never":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Rare":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Sometimes":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Super":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0},"Super Super":{"GOP Base":0,"Lean GOP":0,"Swing":0,"Lean D":0,"Dem Base":0}}},"Reversion to Mean":{"Turnout":{"New/Never":{"GOP Base":-0.01,"Lean GOP":0,"Swing":0.02,"Lean D":0.03,"Dem Base":0.03},"Rare":{"GOP Base":-0.01,"Lean GOP":0,"Swing":0.02,"Lean D":0.03,"Dem Base":0.03},"Sometimes":{"GOP Base":-0.01,"Lean GOP":0,"Swing":0.01,"Lean D":0.02,"Dem Base":0.02},"Super":{"GOP Base":-0.01,"Lean GOP":0,"Swing":0.01,"Lean D":0.01,"Dem Base":0.01},"Super Super":{"GOP Base":0,"Lean GOP":0,"Swing":0.01,"Lean D":0.01,"Dem Base":0.01}},"Support":{"New/Never":{"GOP Base":0,"Lean GOP":0.01,"Swing":0.03,"Lean D":0.02,"Dem Base":0.01},"Rare":{"GOP Base":0,"Lean GOP":0.01,"Swing":0.03,"Lean D":0.02,"Dem Base":0.01},"Sometimes":{"GOP Base":0,"Lean GOP":0.01,"Swing":0.02,"Lean D":0.01,"Dem Base":0},"Super":{"GOP Base":0,"Lean GOP":0,"Swing":0.01,"Lean D":0.01,"Dem Base":0},"Super Super":{"GOP Base":0,"Lean GOP":0,"Swing":0.01,"Lean D":0.01,"Dem Base":0}}}}
 
 // ─── App state ────────────────────────────────────────────────────────────────
-let VOTER_DATA = []
+let ALL_DATA = []
+let selectedState = ""
 let selectedScenario = "Blue Flood"
 let districtFilter = "All"
 let raceFilter = "All"
 let multiplier = 1.0
 
-// ─── Calculation engine ───────────────────────────────────────────────────────
-function runModel(scenarioName, district, race, mult) {
+// ─── Derived from selected state ──────────────────────────────────────────────
+function stateData() {
+  if (!selectedState) return ALL_DATA
+  return ALL_DATA.filter(r => r.state === selectedState)
+}
+
+function availableStates() {
+  return [...new Set(ALL_DATA.map(r => r.state || "??"))].sort()
+}
+
+// ─── Calculation ──────────────────────────────────────────────────────────────
+function runModel(rows, scenarioName, mult) {
   const scenario = SCENARIOS[scenarioName]
-  let bDem=0, bRep=0, bTurnout=0, pDem=0, pRep=0, pTurnout=0
-  for (const row of VOTER_DATA) {
-    if (district !== "All" && row.district !== district) continue
-    if (race !== "All" && row.race !== race) continue
-    const tMap = SCORE_MAP[row.tScore], sMap = SCORE_MAP[row.sScore]
-    if (!tMap || !sMap) continue
-    const initTurnout = row.count * tMap.midpoint
-    const initDem    = initTurnout * sMap.midpoint
-    bDem += initDem; bRep += initTurnout - initDem; bTurnout += initTurnout
-    const tDelta = (scenario.Turnout[tMap.turnout]?.[sMap.partisan] ?? 0) * mult
-    const sDelta = (scenario.Support[tMap.turnout]?.[sMap.partisan] ?? 0) * mult
-    const adjTurnout = initTurnout * (1 + tDelta)
-    const adjDem     = ((initDem / initTurnout) + sDelta) * adjTurnout
-    pDem += adjDem; pRep += adjTurnout - adjDem; pTurnout += adjTurnout
+  let bDem=0,bRep=0,bTurnout=0,pDem=0,pRep=0,pTurnout=0
+  for (const row of rows) {
+    const tMap=SCORE_MAP[row.tScore], sMap=SCORE_MAP[row.sScore]
+    if (!tMap||!sMap) continue
+    const initT=row.count*tMap.midpoint, initD=initT*sMap.midpoint
+    bDem+=initD; bRep+=initT-initD; bTurnout+=initT
+    const tD=(scenario.Turnout[tMap.turnout]?.[sMap.partisan]??0)*mult
+    const sD=(scenario.Support[tMap.turnout]?.[sMap.partisan]??0)*mult
+    const adjT=initT*(1+tD), adjD=((initD/initT)+sD)*adjT
+    pDem+=adjD; pRep+=adjT-adjD; pTurnout+=adjT
   }
-  return {bDem, bRep, bTurnout, pDem, pRep, pTurnout}
+  return {bDem,bRep,bTurnout,pDem,pRep,pTurnout}
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 const fmt = n => Math.round(n).toLocaleString()
-const pct = n => (n * 100).toFixed(1) + "%"
-
-function deltaEl(n, isRep) {
-  const pos = isRep ? n <= 0 : n >= 0
-  const cls = pos ? "delta-pos" : "delta-neg"
-  return `<span class="${cls}">${n >= 0 ? "+" : ""}${fmt(n)}</span>`
+const pct = n => (n*100).toFixed(1)+"%"
+const deltaEl = (n) => {
+  return `<span class="${n>=0?'delta-pos':'delta-neg'}">${n>=0?"+":""}${fmt(n)}</span>`
 }
 
-// ─── Build districts dropdown from loaded data ────────────────────────────────
-function buildDistrictOptions() {
-  const chambers = [...new Set(VOTER_DATA.map(r => r.chamber))].sort()
-  const hasSS = chambers.includes("SS")
-  const hasSH = chambers.includes("SH")
-  const hasCD = chambers.includes("CD")
-
+// ─── Build district dropdown ──────────────────────────────────────────────────
+function buildDistrictOptions(data) {
+  const chambers = [...new Set(data.map(r=>r.chamber))].sort()
+  const labels = {CD:"Congressional Districts", SS:"State Senate", SH:"State House"}
   let opts = '<option value="All">Statewide</option>'
-
-  if (hasCD) {
-    const cds = [...new Set(VOTER_DATA.filter(r=>r.chamber==="CD").map(r=>r.district))].sort((a,b)=>+a-+b)
-    opts += '<optgroup label="Congressional Districts">'
-    cds.forEach(d => opts += `<option value="CD|${d}">CD ${d}</option>`)
-    opts += '</optgroup>'
-  }
-  if (hasSS) {
-    const ss = [...new Set(VOTER_DATA.filter(r=>r.chamber==="SS").map(r=>r.district))].sort((a,b)=>+a-+b)
-    opts += '<optgroup label="State Senate">'
-    ss.forEach(d => opts += `<option value="SS|${d}">SS ${d}</option>`)
-    opts += '</optgroup>'
-  }
-  if (hasSH) {
-    const sh = [...new Set(VOTER_DATA.filter(r=>r.chamber==="SH").map(r=>r.district))].sort((a,b)=>+a-+b)
-    opts += '<optgroup label="State House">'
-    sh.forEach(d => opts += `<option value="SH|${d}">SH ${d}</option>`)
+  for (const ch of ["CD","SS","SH"]) {
+    if (!chambers.includes(ch)) continue
+    const districts = [...new Set(data.filter(r=>r.chamber===ch).map(r=>r.district))]
+      .sort((a,b)=>isNaN(a)||isNaN(b)?a.localeCompare(b):+a-+b)
+    opts += `<optgroup label="${labels[ch]||ch}">`
+    districts.forEach(d => opts+=`<option value="${ch}|${d}">${ch} ${d}</option>`)
     opts += '</optgroup>'
   }
   return opts
 }
 
+// ─── State picker ─────────────────────────────────────────────────────────────
+function buildStatePicker() {
+  const states = availableStates()
+  const picker = document.getElementById("statePicker")
+  picker.innerHTML = states.map(s =>
+    `<option value="${s}"${s===selectedState?" selected":""}>${STATE_NAMES[s]||s} (${s})</option>`
+  ).join("")
+}
+
+function setState(val) {
+  selectedState = val
+  districtFilter = "All"
+  const name = STATE_NAMES[val] || val
+  document.getElementById("pageTitle").textContent = `${name} Election Scenario Tool`
+  renderApp()
+}
+
 // ─── Render ───────────────────────────────────────────────────────────────────
 function renderScenarios() {
-  return Object.entries(SCENARIO_META).map(([name, meta]) => `
-    <div class="scenario-card${name === selectedScenario ? " active" : ""}" onclick="selectScenario('${name}')">
+  return Object.entries(SCENARIO_META).map(([name,meta])=>`
+    <div class="scenario-card${name===selectedScenario?" active":""}" onclick="selectScenario('${name.replace(/'/g,"\\'")}')">
       <h3>${name}</h3>
       <div class="lean ${meta.cls}">${meta.lean}</div>
       <p>${meta.desc}</p>
@@ -174,87 +205,50 @@ function renderScenarios() {
 }
 
 function renderResults() {
-  let chamber = "All", district = "All"
+  let data = stateData().filter(r => r.district && r.district !== "Not Available")
+
+  if (raceFilter !== "All") data = data.filter(r=>r.race===raceFilter)
+
+  let filteredRows = data
   if (districtFilter !== "All") {
-    const parts = districtFilter.split("|")
-    chamber = parts[0]; district = parts[1]
+    const [ch, dist] = districtFilter.split("|")
+    filteredRows = data.filter(r=>r.chamber===ch && r.district===dist)
   }
 
-  // Filter by chamber first, then district
-  const filtered = VOTER_DATA.filter(r => {
-    if (chamber !== "All" && r.chamber !== chamber) return false
-    if (district !== "All" && r.district !== district) return false
-    if (raceFilter !== "All" && r.race !== raceFilter) return false
-    return true
-  })
+  const r = runModel(filteredRows, selectedScenario, multiplier)
+  const dDem=Math.round(r.pDem-r.bDem), dRep=Math.round(r.pRep-r.bRep), dT=Math.round(r.pTurnout-r.bTurnout)
+  const bPct=r.bTurnout>0?r.bDem/r.bTurnout:0
+  const pPct=r.pTurnout>0?r.pDem/r.pTurnout:0
+  const shift=(pPct-bPct)*100
 
-  // Run model on filtered rows using a temp override
-  const saved = VOTER_DATA
-  VOTER_DATA = filtered
-  const r = runModel(selectedScenario, "All", "All", multiplier)
-  VOTER_DATA = saved
-
-  const dDem     = Math.round(r.pDem - r.bDem)
-  const dRep     = Math.round(r.pRep - r.bRep)
-  const dTurnout = Math.round(r.pTurnout - r.bTurnout)
-  const bPct     = r.bTurnout > 0 ? r.bDem / r.bTurnout : 0
-  const pPct_val = r.pTurnout > 0 ? r.pDem / r.pTurnout : 0
-  const shift    = (pPct_val - bPct) * 100
-
-  const subLabel = districtFilter === "All" ? "Statewide" :
-    `${chamber} ${district}`
-  const raceLabel = raceFilter === "All" ? "All Groups" :
-    ({W:"White",B:"Black",H:"Hispanic",A:"Asian/PI",N:"Native American",U:"Uncoded"}[raceFilter] || raceFilter)
+  const distLabel = districtFilter==="All" ? "Statewide" : districtFilter.replace("|"," ")
+  const raceLabel = raceFilter==="All" ? "All Groups" :
+    ({W:"White",B:"Black",H:"Hispanic",A:"Asian/PI",N:"Native American",U:"Uncoded"}[raceFilter]||raceFilter)
 
   return `
     <div class="results-header">
       <h2>Results</h2>
       <span class="scenario-badge">${selectedScenario}</span>
-      <span class="results-subtitle">${subLabel} · ${raceLabel}</span>
+      <span class="results-subtitle">${distLabel} · ${raceLabel}</span>
     </div>
     <table class="results-table">
-      <thead><tr>
-        <th></th><th>Baseline</th><th>Projected</th><th>Delta</th>
-      </tr></thead>
+      <thead><tr><th></th><th>Baseline</th><th>Projected</th><th>Delta</th></tr></thead>
       <tbody>
-        <tr>
-          <td>Dem Votes</td>
-          <td class="num">${fmt(r.bDem)}</td>
-          <td class="bold-num">${fmt(r.pDem)}</td>
-          <td class="delta-cell">${deltaEl(dDem, false)}</td>
-        </tr>
-        <tr>
-          <td>Rep Votes</td>
-          <td class="num">${fmt(r.bRep)}</td>
-          <td class="bold-num">${fmt(r.pRep)}</td>
-          <td class="delta-cell">${deltaEl(dRep, true)}</td>
-        </tr>
-        <tr>
-          <td>Total Turnout</td>
-          <td class="num">${fmt(r.bTurnout)}</td>
-          <td class="bold-num">${fmt(r.pTurnout)}</td>
-          <td class="delta-cell">${deltaEl(dTurnout, false)}</td>
-        </tr>
+        <tr><td>Dem Votes</td><td class="num">${fmt(r.bDem)}</td><td class="bold-num">${fmt(r.pDem)}</td><td class="delta-cell">${deltaEl(dDem)}</td></tr>
+        <tr><td>Rep Votes</td><td class="num">${fmt(r.bRep)}</td><td class="bold-num">${fmt(r.pRep)}</td><td class="delta-cell">${deltaEl(dRep)}</td></tr>
+        <tr><td>Total Turnout</td><td class="num">${fmt(r.bTurnout)}</td><td class="bold-num">${fmt(r.pTurnout)}</td><td class="delta-cell">${deltaEl(dT)}</td></tr>
       </tbody>
     </table>
     <div class="stats-row">
-      <div class="stat">
-        <span class="stat-label">Baseline Dem%</span>
-        <span class="stat-value">${pct(bPct)}</span>
-      </div>
+      <div class="stat"><span class="stat-label">Baseline Dem%</span><span class="stat-value">${pct(bPct)}</span></div>
       <span class="arrow">→</span>
-      <div class="stat">
-        <span class="stat-label">Projected Dem%</span>
-        <span class="stat-value">${pct(pPct_val)}</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">Margin Shift</span>
-        <span class="shift-badge${shift < 0 ? " neg" : ""}">${shift >= 0 ? "+" : ""}${shift.toFixed(1)}pts</span>
-      </div>
+      <div class="stat"><span class="stat-label">Projected Dem%</span><span class="stat-value">${pct(pPct)}</span></div>
+      <div class="stat"><span class="stat-label">Margin Shift</span><span class="shift-badge${shift<0?" neg":""}">${shift>=0?"+":""}${shift.toFixed(1)}pts</span></div>
     </div>`
 }
 
 function renderApp() {
+  const data = stateData().filter(r=>r.district && r.district!=="Not Available")
   document.getElementById("app").innerHTML = `
     <div class="section-label">Select Scenario</div>
     <div class="scenario-grid">${renderScenarios()}</div>
@@ -264,7 +258,7 @@ function renderApp() {
         <div class="filter-group">
           <label>District</label>
           <select id="districtFilter" onchange="setDistrict(this.value)">
-            ${buildDistrictOptions()}
+            ${buildDistrictOptions(data)}
           </select>
         </div>
         <div class="filter-group">
@@ -281,45 +275,39 @@ function renderApp() {
         </div>
         <div class="filter-group">
           <label>Scenario Multiplier: <span id="multLabel">100%</span></label>
-          <input type="range" id="multSlider" min="0" max="300" value="100" step="1"
-            oninput="setMultiplier(this.value)">
+          <input type="range" id="multSlider" min="0" max="300" value="100" step="1" oninput="setMultiplier(this.value)">
           <div class="slider-row"><span>0%</span><span>100%</span><span>300%</span></div>
         </div>
       </div>
-      <div class="results-card" id="resultsCard">
-        ${renderResults()}
-      </div>
+      <div class="results-card" id="resultsCard">${renderResults()}</div>
     </div>`
+
+  // Restore filter selections
+  if (districtFilter !== "All") {
+    const el = document.getElementById("districtFilter")
+    if (el) el.value = districtFilter
+  }
+  if (raceFilter !== "All") {
+    const el = document.getElementById("raceFilter")
+    if (el) el.value = raceFilter
+  }
 }
 
-// ─── Event handlers ───────────────────────────────────────────────────────────
-function selectScenario(name) {
-  selectedScenario = name
-  renderApp()
-}
-function setDistrict(val) {
-  districtFilter = val
-  document.getElementById("resultsCard").innerHTML = renderResults()
-}
-function setRace(val) {
-  raceFilter = val
-  document.getElementById("resultsCard").innerHTML = renderResults()
-}
-function setMultiplier(val) {
-  multiplier = val / 100
-  document.getElementById("multLabel").textContent = val + "%"
-  document.getElementById("resultsCard").innerHTML = renderResults()
-}
+function selectScenario(name) { selectedScenario=name; renderApp() }
+function setDistrict(val)     { districtFilter=val; document.getElementById("resultsCard").innerHTML=renderResults() }
+function setRace(val)         { raceFilter=val; document.getElementById("resultsCard").innerHTML=renderResults() }
+function setMultiplier(val)   { multiplier=val/100; document.getElementById("multLabel").textContent=val+"%"; document.getElementById("resultsCard").innerHTML=renderResults() }
 
-// ─── Boot: fetch data then render ─────────────────────────────────────────────
-// Data lives at: voter-model/src/data/voter_model.json (relative to index.html)
+// ─── Boot ─────────────────────────────────────────────────────────────────────
 fetch("voter-model/src/data/voter_model.json")
-  .then(res => {
-    if (!res.ok) throw new Error(`HTTP ${res.status}`)
-    return res.json()
-  })
+  .then(res => { if(!res.ok) throw new Error(`HTTP ${res.status}`); return res.json() })
   .then(data => {
-    VOTER_DATA = data.filter(r => r.district && r.district !== "Not Available")
+    ALL_DATA = data.filter(r => r.district && r.district !== "Not Available")
+    const states = availableStates()
+    selectedState = states[0] || ""
+    buildStatePicker()
+    const name = STATE_NAMES[selectedState] || selectedState
+    document.getElementById("pageTitle").textContent = `${name} Election Scenario Tool`
     renderApp()
   })
   .catch(err => {
@@ -327,9 +315,10 @@ fetch("voter-model/src/data/voter_model.json")
       <div class="error-msg">
         <strong>Could not load voter data.</strong><br><br>
         Expected file at: <code>voter-model/src/data/voter_model.json</code><br><br>
-        Make sure you have run <code>node voter-model/scripts/csv_to_json.js</code>
-        and committed the output file to the repo.
-        <br><br>Details: ${err.message}
+        This file is generated automatically when you push CSV exports to
+        <code>voter-model/data/raw/</code>. Make sure you have uploaded your
+        TargetSmart exports and that the GitHub Action has finished running.<br><br>
+        Details: ${err.message}
       </div>`
   })
 </script>
