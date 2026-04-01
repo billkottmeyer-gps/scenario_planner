@@ -1,0 +1,15 @@
+{
+  "name": "voter-model",
+  "version": "1.0.0",
+  "description": "A what-if calculator for elections. Load voter data, pick a scenario, see projected Democratic and Republican vote totals and seat counts across every district in a state.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "papaparse": "^5.5.3"
+  }
+}

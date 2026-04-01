@@ -1,0 +1,186 @@
+{
+  "_readme": [
+    "─────────────────────────────────────────────────────────────────────────",
+    "WHAT THIS FILE IS",
+    "─────────────────────────────────────────────────────────────────────────",
+    "These are the named political scenario assumptions for the model.",
+    "Each scenario defines how much turnout and Democratic support shifts",
+    "for voters in each combination of turnout bucket and partisan bucket.",
+    "",
+    "IMPORTANT — HOW THE NUMBERS WORK",
+    "All delta values are stored as decimals.",
+    "A raw value of 5 percentage points is stored here as 0.05",
+    "A raw value of -3 percentage points is stored here as -0.03",
+    "A raw value of 0 is stored as 0.00",
+    "",
+    "IMPORTANT — DO NOT CHANGE WITHOUT AUTHORIZATION",
+    "These are the initial default values set by the research team.",
+    "Do not change any values without direction from the research team.",
+    "Do not hardcode any of these values inside the engine or component files.",
+    "If assumptions need updating, edit THIS FILE ONLY, then redeploy.",
+    "Document every change in CHANGELOG.md.",
+    "",
+    "IMPORTANT — SPELLING MUST MATCH EXACTLY",
+    "The bucket names in this file must match exactly what is in scoreLookup.js.",
+    "New/Never — not New or Never",
+    "Rare — not RARE or rare",
+    "Sometimes — not Sometimes else",
+    "Super — not super",
+    "Super Super — not Super super",
+    "GOP Base — Lean GOP — Swing — Lean D — Dem Base",
+    "─────────────────────────────────────────────────────────────────────────"
+  ],
+
+  "Baseline": {
+    "Turnout": {
+      "New/Never":   { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 },
+      "Rare":        { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 },
+      "Sometimes":   { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 },
+      "Super":       { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 },
+      "Super Super": { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 }
+    },
+    "Support": {
+      "New/Never":   { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 },
+      "Rare":        { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 },
+      "Sometimes":   { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 },
+      "Super":       { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 },
+      "Super Super": { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 }
+    }
+  },
+
+  "Blue Flood": {
+    "Turnout": {
+      "New/Never":   { "GOP Base": -0.02, "Lean GOP":  0.00, "Swing":  0.03, "Lean D":  0.04, "Dem Base":  0.05 },
+      "Rare":        { "GOP Base": -0.02, "Lean GOP":  0.00, "Swing":  0.03, "Lean D":  0.04, "Dem Base":  0.05 },
+      "Sometimes":   { "GOP Base": -0.02, "Lean GOP":  0.00, "Swing":  0.02, "Lean D":  0.04, "Dem Base":  0.05 },
+      "Super":       { "GOP Base": -0.01, "Lean GOP":  0.00, "Swing":  0.02, "Lean D":  0.03, "Dem Base":  0.04 },
+      "Super Super": { "GOP Base": -0.01, "Lean GOP":  0.00, "Swing":  0.01, "Lean D":  0.02, "Dem Base":  0.03 }
+    },
+    "Support": {
+      "New/Never":   { "GOP Base":  0.03, "Lean GOP":  0.05, "Swing":  0.05, "Lean D":  0.05, "Dem Base":  0.07 },
+      "Rare":        { "GOP Base":  0.03, "Lean GOP":  0.05, "Swing":  0.04, "Lean D":  0.05, "Dem Base":  0.07 },
+      "Sometimes":   { "GOP Base":  0.03, "Lean GOP":  0.05, "Swing":  0.04, "Lean D":  0.05, "Dem Base":  0.07 },
+      "Super":       { "GOP Base":  0.02, "Lean GOP":  0.04, "Swing":  0.03, "Lean D":  0.04, "Dem Base":  0.05 },
+      "Super Super": { "GOP Base":  0.02, "Lean GOP":  0.04, "Swing":  0.02, "Lean D":  0.04, "Dem Base":  0.05 }
+    }
+  },
+
+  "Red Wall": {
+    "Turnout": {
+      "New/Never":   { "GOP Base":  0.02, "Lean GOP":  0.00, "Swing": -0.03, "Lean D": -0.04, "Dem Base": -0.05 },
+      "Rare":        { "GOP Base":  0.02, "Lean GOP":  0.00, "Swing": -0.03, "Lean D": -0.04, "Dem Base": -0.05 },
+      "Sometimes":   { "GOP Base":  0.02, "Lean GOP":  0.00, "Swing": -0.02, "Lean D": -0.04, "Dem Base": -0.05 },
+      "Super":       { "GOP Base":  0.01, "Lean GOP":  0.00, "Swing": -0.02, "Lean D": -0.03, "Dem Base": -0.04 },
+      "Super Super": { "GOP Base":  0.01, "Lean GOP":  0.00, "Swing": -0.01, "Lean D": -0.02, "Dem Base": -0.03 }
+    },
+    "Support": {
+      "New/Never":   { "GOP Base": -0.03, "Lean GOP": -0.05, "Swing": -0.05, "Lean D": -0.05, "Dem Base": -0.07 },
+      "Rare":        { "GOP Base": -0.03, "Lean GOP": -0.05, "Swing": -0.04, "Lean D": -0.05, "Dem Base": -0.07 },
+      "Sometimes":   { "GOP Base": -0.03, "Lean GOP": -0.05, "Swing": -0.04, "Lean D": -0.05, "Dem Base": -0.07 },
+      "Super":       { "GOP Base": -0.02, "Lean GOP": -0.04, "Swing": -0.03, "Lean D": -0.04, "Dem Base": -0.05 },
+      "Super Super": { "GOP Base": -0.02, "Lean GOP": -0.04, "Swing": -0.02, "Lean D": -0.04, "Dem Base": -0.05 }
+    }
+  },
+
+  "Even Split": {
+    "Turnout": {
+      "New/Never":   { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 },
+      "Rare":        { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 },
+      "Sometimes":   { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 },
+      "Super":       { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 },
+      "Super Super": { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 }
+    },
+    "Support": {
+      "New/Never":   { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 },
+      "Rare":        { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 },
+      "Sometimes":   { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 },
+      "Super":       { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 },
+      "Super Super": { "GOP Base": 0.00, "Lean GOP": 0.00, "Swing": 0.00, "Lean D": 0.00, "Dem Base": 0.00 }
+    }
+  },
+
+  "GOP Backlash": {
+    "Turnout": {
+      "New/Never":   { "GOP Base":  0.03, "Lean GOP":  0.02, "Swing":  0.02, "Lean D":  0.01, "Dem Base":  0.01 },
+      "Rare":        { "GOP Base":  0.03, "Lean GOP":  0.02, "Swing":  0.02, "Lean D":  0.01, "Dem Base":  0.01 },
+      "Sometimes":   { "GOP Base":  0.03, "Lean GOP":  0.02, "Swing":  0.01, "Lean D":  0.01, "Dem Base":  0.01 },
+      "Super":       { "GOP Base":  0.02, "Lean GOP":  0.01, "Swing":  0.00, "Lean D":  0.01, "Dem Base":  0.01 },
+      "Super Super": { "GOP Base":  0.02, "Lean GOP":  0.01, "Swing":  0.00, "Lean D":  0.01, "Dem Base":  0.01 }
+    },
+    "Support": {
+      "New/Never":   { "GOP Base":  0.04, "Lean GOP":  0.03, "Swing":  0.03, "Lean D":  0.01, "Dem Base":  0.00 },
+      "Rare":        { "GOP Base":  0.04, "Lean GOP":  0.03, "Swing":  0.03, "Lean D":  0.01, "Dem Base":  0.00 },
+      "Sometimes":   { "GOP Base":  0.04, "Lean GOP":  0.03, "Swing":  0.03, "Lean D":  0.01, "Dem Base":  0.00 },
+      "Super":       { "GOP Base":  0.04, "Lean GOP":  0.03, "Swing":  0.02, "Lean D":  0.01, "Dem Base":  0.00 },
+      "Super Super": { "GOP Base":  0.03, "Lean GOP":  0.02, "Swing":  0.02, "Lean D":  0.01, "Dem Base":  0.00 }
+    }
+  },
+
+  "Dem Wave, GOP Hold": {
+    "Turnout": {
+      "New/Never":   { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.03, "Lean D":  0.04, "Dem Base":  0.05 },
+      "Rare":        { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.03, "Lean D":  0.04, "Dem Base":  0.05 },
+      "Sometimes":   { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.03, "Lean D":  0.04, "Dem Base":  0.05 },
+      "Super":       { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.03, "Lean D":  0.04, "Dem Base":  0.04 },
+      "Super Super": { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.03, "Lean D":  0.04, "Dem Base":  0.04 }
+    },
+    "Support": {
+      "New/Never":   { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.02, "Lean D":  0.03, "Dem Base":  0.03 },
+      "Rare":        { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.02, "Lean D":  0.03, "Dem Base":  0.03 },
+      "Sometimes":   { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.02, "Lean D":  0.03, "Dem Base":  0.03 },
+      "Super":       { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.02, "Lean D":  0.03, "Dem Base":  0.03 },
+      "Super Super": { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.02, "Lean D":  0.03, "Dem Base":  0.03 }
+    }
+  },
+
+  "Partisan Surge, Infrequent Drop": {
+    "Turnout": {
+      "New/Never":   { "GOP Base": -0.03, "Lean GOP": -0.03, "Swing": -0.03, "Lean D": -0.03, "Dem Base": -0.03 },
+      "Rare":        { "GOP Base": -0.03, "Lean GOP": -0.03, "Swing": -0.03, "Lean D": -0.03, "Dem Base": -0.03 },
+      "Sometimes":   { "GOP Base": -0.02, "Lean GOP": -0.02, "Swing": -0.02, "Lean D": -0.02, "Dem Base": -0.02 },
+      "Super":       { "GOP Base":  0.02, "Lean GOP":  0.02, "Swing":  0.02, "Lean D":  0.02, "Dem Base":  0.02 },
+      "Super Super": { "GOP Base":  0.02, "Lean GOP":  0.02, "Swing":  0.02, "Lean D":  0.02, "Dem Base":  0.02 }
+    },
+    "Support": {
+      "New/Never":   { "GOP Base": -0.03, "Lean GOP": -0.02, "Swing":  0.01, "Lean D":  0.03, "Dem Base":  0.05 },
+      "Rare":        { "GOP Base": -0.03, "Lean GOP": -0.02, "Swing":  0.01, "Lean D":  0.03, "Dem Base":  0.05 },
+      "Sometimes":   { "GOP Base": -0.03, "Lean GOP": -0.02, "Swing":  0.01, "Lean D":  0.03, "Dem Base":  0.05 },
+      "Super":       { "GOP Base": -0.03, "Lean GOP": -0.02, "Swing":  0.01, "Lean D":  0.03, "Dem Base":  0.05 },
+      "Super Super": { "GOP Base": -0.03, "Lean GOP": -0.02, "Swing":  0.01, "Lean D":  0.03, "Dem Base":  0.05 }
+    }
+  },
+
+  "Polarized High Turnout": {
+    "Turnout": {
+      "New/Never":   { "GOP Base":  0.02, "Lean GOP":  0.01, "Swing":  0.00, "Lean D":  0.01, "Dem Base":  0.02 },
+      "Rare":        { "GOP Base":  0.02, "Lean GOP":  0.01, "Swing":  0.00, "Lean D":  0.01, "Dem Base":  0.02 },
+      "Sometimes":   { "GOP Base":  0.02, "Lean GOP":  0.01, "Swing":  0.00, "Lean D":  0.01, "Dem Base":  0.02 },
+      "Super":       { "GOP Base":  0.01, "Lean GOP":  0.00, "Swing":  0.00, "Lean D":  0.00, "Dem Base":  0.01 },
+      "Super Super": { "GOP Base":  0.01, "Lean GOP":  0.00, "Swing":  0.00, "Lean D":  0.00, "Dem Base":  0.01 }
+    },
+    "Support": {
+      "New/Never":   { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.00, "Lean D":  0.00, "Dem Base":  0.00 },
+      "Rare":        { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.00, "Lean D":  0.00, "Dem Base":  0.00 },
+      "Sometimes":   { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.00, "Lean D":  0.00, "Dem Base":  0.00 },
+      "Super":       { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.00, "Lean D":  0.00, "Dem Base":  0.00 },
+      "Super Super": { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.00, "Lean D":  0.00, "Dem Base":  0.00 }
+    }
+  },
+
+  "Reversion to Mean": {
+    "Turnout": {
+      "New/Never":   { "GOP Base": -0.01, "Lean GOP":  0.00, "Swing":  0.02, "Lean D":  0.03, "Dem Base":  0.03 },
+      "Rare":        { "GOP Base": -0.01, "Lean GOP":  0.00, "Swing":  0.02, "Lean D":  0.03, "Dem Base":  0.03 },
+      "Sometimes":   { "GOP Base": -0.01, "Lean GOP":  0.00, "Swing":  0.01, "Lean D":  0.02, "Dem Base":  0.02 },
+      "Super":       { "GOP Base": -0.01, "Lean GOP":  0.00, "Swing":  0.01, "Lean D":  0.01, "Dem Base":  0.01 },
+      "Super Super": { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.01, "Lean D":  0.01, "Dem Base":  0.01 }
+    },
+    "Support": {
+      "New/Never":   { "GOP Base":  0.00, "Lean GOP":  0.01, "Swing":  0.03, "Lean D":  0.02, "Dem Base":  0.01 },
+      "Rare":        { "GOP Base":  0.00, "Lean GOP":  0.01, "Swing":  0.03, "Lean D":  0.02, "Dem Base":  0.01 },
+      "Sometimes":   { "GOP Base":  0.00, "Lean GOP":  0.01, "Swing":  0.02, "Lean D":  0.01, "Dem Base":  0.00 },
+      "Super":       { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.01, "Lean D":  0.01, "Dem Base":  0.00 },
+      "Super Super": { "GOP Base":  0.00, "Lean GOP":  0.00, "Swing":  0.01, "Lean D":  0.01, "Dem Base":  0.00 }
+    }
+  }
+}
