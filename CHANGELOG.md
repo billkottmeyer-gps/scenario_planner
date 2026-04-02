@@ -13,3 +13,6 @@ Fix process_data workflow — add write permissions and Node v4
 ## 2026-04-02 13:45 UTC - billkottmeyer-gps
 Support both SH column header variants
 
+## 2026-04-02 13:46 UTC - billkottmeyer-gps
+Add Alaska data — AK and MS both loaded, 61,878 rows total
+
