@@ -7,3 +7,6 @@ Add partisan composition scoreboard
 ## 2026-04-02 13:34 UTC - billkottmeyer-gps
 adds Alaska data as POC for multistate drop down
 
+## 2026-04-02 13:44 UTC - billkottmeyer-gps
+Fix process_data workflow — add write permissions and Node v4
+
