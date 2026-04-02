@@ -333,21 +333,21 @@ let COMPOSITION = {}
 // ─── Elections data (loaded from elections_2026.json) ─────────────────────────
 let ELECTIONS = {}
 
-// ─── Seat projection per chamber (ignores district/race filters) ──────────────
-// Only projects districts that are actually on the 2026 ballot
-function projectSeats(chamber, scenarioName, mult) {
+// ─── Seat projection: contested districts only ───────────────────────────────
+// Returns D wins in contested seats. Returns null for "none" chambers.
+function projectContested(chamber, scenarioName, mult) {
   const elScope = ELECTIONS[selectedState]?.[chamber]
-  if (elScope === "none" || elScope === null) return 0
+  if (elScope === "none" || elScope === null) return null
 
-  const balletDistricts = Array.isArray(elScope)
+  const ballotDistricts = Array.isArray(elScope)
     ? new Set(elScope.map(d => String(d)))
-    : null // null means "all"
+    : null // null = all districts
 
   const rows = ALL_DATA.filter(r => {
     if (r.state !== selectedState) return false
     if (r.chamber !== chamber) return false
     if (!r.district || r.district === "Not Available") return false
-    if (balletDistricts && !balletDistricts.has(r.district)) return false
+    if (ballotDistricts && !ballotDistricts.has(r.district)) return false
     return true
   })
   const scenario = SCENARIOS[scenarioName]
@@ -366,6 +366,27 @@ function projectSeats(chamber, scenarioName, mult) {
     districts[row.district].adjRep += (adjT - adjD)
   }
   return Object.values(districts).filter(d => d.adjDem > d.adjRep).length
+}
+
+// ─── Full chamber projection including holdovers ──────────────────────────────
+function projectChamber(chamberKey, chamberData, scenarioName, mult) {
+  const elScope = ELECTIONS[selectedState]?.[chamberKey]
+  const total = chamberData.total || 0
+
+  // No election — current composition carries over unchanged
+  if (elScope === "none" || elScope === null) {
+    return { projD: chamberData.d, projR: chamberData.r }
+  }
+
+  const contestedWins = projectContested(chamberKey, scenarioName, mult) || 0
+  const contestedSeats = Array.isArray(elScope) ? elScope.length : total
+  const holdD = chamberData.hd || 0
+  const holdR = chamberData.hr || 0
+
+  return {
+    projD: contestedWins + holdD,
+    projR: (contestedSeats - contestedWins) + holdR
+  }
 }
 
 // ─── Render composition scoreboard ───────────────────────────────────────────
@@ -412,8 +433,7 @@ function renderComposition() {
     return `<div class="seat-row">${parts.join("")}</div>${seatBar(d,r,i,total)}<div class="pct-lbl">${pct}% Dem${i>0?" · "+i+" Ind":""}</div>`
   }
 
-  function modelCell(projD, total, showDelta, currentD) {
-    const projR = total - projD
+  function modelCell(projD, projR, total, showDelta, currentD) {
     const pct = total > 0 ? (projD/total*100).toFixed(1) : 0
     const bar = `<div class="bar-w"><div class="bar-d" style="width:${pct}%"></div></div>`
     if (showDelta) {
@@ -424,13 +444,13 @@ function renderComposition() {
 
   const rows = chambers.map(c => {
     const cv = comp[c.key]
-    const baseSeats = projectSeats(c.key, "Baseline", 1.0)
-    const projSeats = projectSeats(c.key, selectedScenario, multiplier)
+    const base = projectChamber(c.key, cv, "Baseline", 1.0)
+    const proj = projectChamber(c.key, cv, selectedScenario, multiplier)
     return `<tr>
       <td><div class="ch-name">${c.label}</div><div class="ch-sub">${c.sub}</div></td>
       <td>${currentCell(cv)}</td>
-      <td class="col-sep">${modelCell(baseSeats, cv.total, false, cv.d)}</td>
-      <td class="col-sep">${modelCell(projSeats, cv.total, true, cv.d)}</td>
+      <td class="col-sep">${modelCell(base.projD, base.projR, cv.total, false, cv.d)}</td>
+      <td class="col-sep">${modelCell(proj.projD, proj.projR, cv.total, true, cv.d)}</td>
     </tr>`
   }).join("")
 
