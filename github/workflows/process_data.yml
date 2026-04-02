@@ -1,8 +1,5 @@
 name: Process TargetSmart Data
 
-# Runs automatically whenever CSV files are pushed to voter-model/data/raw/
-# You never have to run anything manually — just upload your CSVs and this does the rest.
-
 on:
   push:
     paths:
@@ -11,30 +8,25 @@ on:
 jobs:
   process:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
+      - uses: actions/checkout@v4
 
-      - name: Check out repo
-        uses: actions/checkout@v3
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
 
       - name: Install dependencies
-        run: |
-          cd voter-model
-          npm install papaparse
+        run: cd voter-model && npm install papaparse
 
-      - name: Run processing script (all states)
-        run: |
-          cd voter-model
-          node scripts/csv_to_json.js all
+      - name: Process all CSV exports
+        run: cd voter-model && node scripts/csv_to_json.js all
 
       - name: Commit updated voter_model.json
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add voter-model/src/data/voter_model.json
-          git commit -m "Auto: regenerated voter_model.json from CSV exports" || echo "No changes to commit"
+          git commit -m "Auto: regenerated voter_model.json from CSV exports" || echo "No changes"
           git push
