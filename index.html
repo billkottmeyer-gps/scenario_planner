@@ -330,9 +330,26 @@ function setMultiplier(val)   { multiplier=val/100; document.getElementById("mul
 // ─── Composition data (loaded from composition.json) ─────────────────────────
 let COMPOSITION = {}
 
+// ─── Elections data (loaded from elections_2026.json) ─────────────────────────
+let ELECTIONS = {}
+
 // ─── Seat projection per chamber (ignores district/race filters) ──────────────
+// Only projects districts that are actually on the 2026 ballot
 function projectSeats(chamber, scenarioName, mult) {
-  const rows = ALL_DATA.filter(r => r.state === selectedState && r.chamber === chamber && r.district && r.district !== "Not Available")
+  const elScope = ELECTIONS[selectedState]?.[chamber]
+  if (elScope === "none" || elScope === null) return 0
+
+  const balletDistricts = Array.isArray(elScope)
+    ? new Set(elScope.map(d => String(d)))
+    : null // null means "all"
+
+  const rows = ALL_DATA.filter(r => {
+    if (r.state !== selectedState) return false
+    if (r.chamber !== chamber) return false
+    if (!r.district || r.district === "Not Available") return false
+    if (balletDistricts && !balletDistricts.has(r.district)) return false
+    return true
+  })
   const scenario = SCENARIOS[scenarioName]
   const districts = {}
   for (const row of rows) {
@@ -363,6 +380,17 @@ function renderComposition() {
     { key:"SS", label:"State senate",            sub:`${comp.SS?.total||0} total seats` },
     { key:"SH", label:"State house",             sub:`${comp.SH?.total||0} total seats` }
   ].filter(c => comp[c.key])
+
+  // Add seats-on-ballot info to sub label
+  chambers.forEach(c => {
+    const elScope = ELECTIONS[selectedState]?.[c.key]
+    if (elScope === "none" || elScope === null) {
+      c.sub += " · no 2026 election"
+    } else if (Array.isArray(elScope)) {
+      c.sub += ` · ${elScope.length} seats on 2026 ballot`
+    }
+    // "all" = no annotation needed
+  })
 
   function seatBar(d, r, i, total) {
     const dp = total > 0 ? (d/total*100).toFixed(1) : 0
@@ -435,11 +463,13 @@ function renderComposition() {
 // ─── Boot ─────────────────────────────────────────────────────────────────────
 Promise.all([
   fetch("voter-model/src/data/voter_model.json").then(r => { if(!r.ok) throw new Error(`voter_model.json: HTTP ${r.status}`); return r.json() }),
-  fetch("voter-model/src/data/composition.json").then(r => { if(!r.ok) throw new Error(`composition.json: HTTP ${r.status}`); return r.json() })
+  fetch("voter-model/src/data/composition.json").then(r => { if(!r.ok) throw new Error(`composition.json: HTTP ${r.status}`); return r.json() }),
+  fetch("voter-model/src/data/elections_2026.json").then(r => { if(!r.ok) throw new Error(`elections_2026.json: HTTP ${r.status}`); return r.json() })
 ])
-  .then(([voterData, compData]) => {
+  .then(([voterData, compData, elData]) => {
     ALL_DATA = voterData.filter(r => r.district && r.district !== "Not Available")
     COMPOSITION = compData
+    ELECTIONS = elData
     const states = availableStates()
     selectedState = states[0] || ""
     buildStatePicker()
@@ -452,7 +482,8 @@ Promise.all([
     document.getElementById("app").innerHTML = `
       <div class="error-msg">
         <strong>Could not load data.</strong><br><br>
-        Expected files at: <code>voter-model/src/data/voter_model.json</code> and <code>voter-model/src/data/composition.json</code><br><br>
+        Expected files at: <code>voter-model/src/data/voter_model.json</code>,
+        <code>composition.json</code>, and <code>elections_2026.json</code><br><br>
         Details: ${err.message}
       </div>`
   })
