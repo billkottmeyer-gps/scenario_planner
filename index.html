@@ -238,10 +238,13 @@ function renderResults() {
 
   if (raceFilter !== "All") data = data.filter(r=>r.race===raceFilter)
 
-  let filteredRows = data
-  if (districtFilter !== "All") {
+  let filteredRows
+  if (districtFilter === "All") {
+    // Statewide: use CD only to avoid triple-counting voters across all chambers
+    filteredRows = data.filter(r => r.chamber === "CD")
+  } else {
     const [ch, dist] = districtFilter.split("|")
-    filteredRows = data.filter(r=>r.chamber===ch && r.district===dist)
+    filteredRows = data.filter(r => r.chamber === ch && r.district === dist)
   }
 
   const r = runModel(filteredRows, selectedScenario, multiplier)
