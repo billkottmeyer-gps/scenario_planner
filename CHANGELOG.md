@@ -4,3 +4,6 @@ Update changelog.yml
 ## 2026-04-01 16:09 UTC - billkottmeyer-gps
 Add partisan composition scoreboard
 
+## 2026-04-02 13:34 UTC - billkottmeyer-gps
+adds Alaska data as POC for multistate drop down
+
