@@ -16,3 +16,6 @@ Support both SH column header variants
 ## 2026-04-02 13:46 UTC - billkottmeyer-gps
 Add Alaska data — AK and MS both loaded, 61,878 rows total
 
+## 2026-04-02 14:02 UTC - billkottmeyer-gps
+Fixes SS and SH elections to current up in 2026
+
