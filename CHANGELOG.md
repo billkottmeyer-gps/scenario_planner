@@ -28,3 +28,6 @@ Add holdover D/R counts to composition.json — all staggered SS and SH chambers
 ## 2026-04-02 14:26 UTC - billkottmeyer-gps
 Fix composition scoreboard — holdovers + contested seats = correct projected totals
 
+## 2026-04-02 14:43 UTC - billkottmeyer-gps
+Fix statewide calculation — use CD only to prevent triple-counting
+
