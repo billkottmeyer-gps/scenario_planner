@@ -16,7 +16,8 @@ const Papa = require("papaparse")
 const CHAMBER_HEADERS = {
   "Geography/Registration Address/Voter File Congressional District": "CD",
   "Geography/Registration Address/Voter File State Senate District":  "SS",
-  "Geography/Registration Address/Voter File State House District":   "SH"
+  "Geography/Registration Address/Voter File State House District":   "SH",
+  "Geography/Current Address/TargetSmart Address - State House District": "SH"
 }
 
 const STATE_HEADER         = "Geography/Registration Address/Voter File Source State"
