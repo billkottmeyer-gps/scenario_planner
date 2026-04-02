@@ -28,362 +28,1253 @@
     "Minnesota House is currently tied 67-67.",
     "Vacancies are counted in total but not in d, r, or i."
   ],
-
   "AL": {
-    "_name": "Alabama", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 2,  "r": 5,  "i": 0, "total": 7   },
-    "SS": { "d": 8,  "r": 26, "i": 0, "total": 35  },
-    "SH": { "d": 29, "r": 76, "i": 0, "total": 105 }
+    "_name": "Alabama",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 2,
+      "r": 5,
+      "i": 0,
+      "total": 7
+    },
+    "SS": {
+      "d": 8,
+      "r": 26,
+      "i": 0,
+      "total": 35
+    },
+    "SH": {
+      "d": 29,
+      "r": 76,
+      "i": 0,
+      "total": 105
+    }
   },
-
   "AK": {
-    "_name": "Alaska", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "_name": "Alaska",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
     "_note": "House and Senate governed by bipartisan coalitions",
-    "CD": { "d": 0,  "r": 1,  "i": 0, "total": 1  },
-    "SS": { "d": 9,  "r": 11, "i": 0, "total": 20 },
-    "SH": { "d": 14, "r": 21, "i": 5, "total": 40 }
+    "CD": {
+      "d": 0,
+      "r": 1,
+      "i": 0,
+      "total": 1
+    },
+    "SS": {
+      "d": 9,
+      "r": 11,
+      "i": 0,
+      "total": 20,
+      "hd": 5,
+      "hr": 5,
+      "hi": 0
+    },
+    "SH": {
+      "d": 14,
+      "r": 21,
+      "i": 5,
+      "total": 40
+    }
   },
-
   "AZ": {
-    "_name": "Arizona", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 3,  "r": 6,  "i": 0, "total": 9  },
-    "SS": { "d": 13, "r": 17, "i": 0, "total": 30 },
-    "SH": { "d": 27, "r": 33, "i": 0, "total": 60 }
+    "_name": "Arizona",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 3,
+      "r": 6,
+      "i": 0,
+      "total": 9
+    },
+    "SS": {
+      "d": 13,
+      "r": 17,
+      "i": 0,
+      "total": 30
+    },
+    "SH": {
+      "d": 27,
+      "r": 33,
+      "i": 0,
+      "total": 60
+    }
   },
-
   "AR": {
-    "_name": "Arkansas", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 0,  "r": 4,  "i": 0, "total": 4   },
-    "SS": { "d": 6,  "r": 29, "i": 0, "total": 35  },
-    "SH": { "d": 19, "r": 81, "i": 0, "total": 100 }
+    "_name": "Arkansas",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 0,
+      "r": 4,
+      "i": 0,
+      "total": 4
+    },
+    "SS": {
+      "d": 6,
+      "r": 29,
+      "i": 0,
+      "total": 35,
+      "hd": 2,
+      "hr": 16,
+      "hi": 0
+    },
+    "SH": {
+      "d": 19,
+      "r": 81,
+      "i": 0,
+      "total": 100
+    }
   },
-
   "CA": {
-    "_name": "California", "_updated": "2026-02-02", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "_name": "California",
+    "_updated": "2026-02-02",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
     "_note": "CD-1 vacant (LaMalfa death Jan 2026). Total 52 seats, 1 vacant.",
-    "CD": { "d": 43, "r": 8,  "i": 0, "total": 52 },
-    "SS": { "d": 30, "r": 9,  "i": 0, "total": 40 },
-    "SH": { "d": 60, "r": 19, "i": 0, "total": 80 }
+    "CD": {
+      "d": 43,
+      "r": 8,
+      "i": 0,
+      "total": 52
+    },
+    "SS": {
+      "d": 30,
+      "r": 9,
+      "i": 0,
+      "total": 40,
+      "hd": 17,
+      "hr": 3,
+      "hi": 0
+    },
+    "SH": {
+      "d": 60,
+      "r": 19,
+      "i": 0,
+      "total": 80
+    }
   },
-
   "CO": {
-    "_name": "Colorado", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "_name": "Colorado",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
     "_note": "Congressional delegation evenly split 4-4",
-    "CD": { "d": 4,  "r": 4,  "i": 0, "total": 8  },
-    "SS": { "d": 23, "r": 12, "i": 0, "total": 35 },
-    "SH": { "d": 43, "r": 22, "i": 0, "total": 65 }
+    "CD": {
+      "d": 4,
+      "r": 4,
+      "i": 0,
+      "total": 8
+    },
+    "SS": {
+      "d": 23,
+      "r": 12,
+      "i": 0,
+      "total": 35,
+      "hd": 11,
+      "hr": 7,
+      "hi": 0
+    },
+    "SH": {
+      "d": 43,
+      "r": 22,
+      "i": 0,
+      "total": 65
+    }
   },
-
   "CT": {
-    "_name": "Connecticut", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 5,  "r": 0,  "i": 0, "total": 5   },
-    "SS": { "d": 25, "r": 10, "i": 0, "total": 36  },
-    "SH": { "d": 101,"r": 49, "i": 0, "total": 151 }
+    "_name": "Connecticut",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 5,
+      "r": 0,
+      "i": 0,
+      "total": 5
+    },
+    "SS": {
+      "d": 25,
+      "r": 10,
+      "i": 0,
+      "total": 36
+    },
+    "SH": {
+      "d": 101,
+      "r": 49,
+      "i": 0,
+      "total": 151
+    }
   },
-
   "DE": {
-    "_name": "Delaware", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 1,  "r": 0, "i": 0, "total": 1  },
-    "SS": { "d": 13, "r": 6, "i": 0, "total": 21 },
-    "SH": { "d": 27, "r": 14,"i": 0, "total": 41 }
+    "_name": "Delaware",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 1,
+      "r": 0,
+      "i": 0,
+      "total": 1
+    },
+    "SS": {
+      "d": 13,
+      "r": 6,
+      "i": 0,
+      "total": 21,
+      "hd": 7,
+      "hr": 3,
+      "hi": 0
+    },
+    "SH": {
+      "d": 27,
+      "r": 14,
+      "i": 0,
+      "total": 41
+    }
   },
-
   "FL": {
-    "_name": "Florida", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 8,  "r": 20, "i": 0, "total": 28  },
-    "SS": { "d": 12, "r": 28, "i": 0, "total": 40  },
-    "SH": { "d": 33, "r": 86, "i": 0, "total": 120 }
+    "_name": "Florida",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 8,
+      "r": 20,
+      "i": 0,
+      "total": 28
+    },
+    "SS": {
+      "d": 12,
+      "r": 28,
+      "i": 0,
+      "total": 40,
+      "hd": 5,
+      "hr": 15,
+      "hi": 0
+    },
+    "SH": {
+      "d": 33,
+      "r": 86,
+      "i": 0,
+      "total": 120
+    }
   },
-
   "GA": {
-    "_name": "Georgia", "_updated": "2026-02-02", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "_name": "Georgia",
+    "_updated": "2026-02-02",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
     "_note": "CD-14 vacant (MTG resignation Jan 2026). Total 14 seats, 1 vacant.",
-    "CD": { "d": 5,  "r": 8,  "i": 0, "total": 14  },
-    "SS": { "d": 23, "r": 33, "i": 0, "total": 56  },
-    "SH": { "d": 80, "r": 100,"i": 0, "total": 180 }
+    "CD": {
+      "d": 5,
+      "r": 8,
+      "i": 0,
+      "total": 14
+    },
+    "SS": {
+      "d": 23,
+      "r": 33,
+      "i": 0,
+      "total": 56
+    },
+    "SH": {
+      "d": 80,
+      "r": 100,
+      "i": 0,
+      "total": 180
+    }
   },
-
   "HI": {
-    "_name": "Hawaii", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 2,  "r": 0, "i": 0, "total": 2  },
-    "SS": { "d": 22, "r": 3, "i": 0, "total": 25 },
-    "SH": { "d": 42, "r": 9, "i": 0, "total": 51 }
+    "_name": "Hawaii",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 2,
+      "r": 0,
+      "i": 0,
+      "total": 2
+    },
+    "SS": {
+      "d": 22,
+      "r": 3,
+      "i": 0,
+      "total": 25,
+      "hd": 11,
+      "hr": 1,
+      "hi": 0
+    },
+    "SH": {
+      "d": 42,
+      "r": 9,
+      "i": 0,
+      "total": 51
+    }
   },
-
   "ID": {
-    "_name": "Idaho", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 0, "r": 2,  "i": 0, "total": 2  },
-    "SS": { "d": 6, "r": 29, "i": 0, "total": 35 },
-    "SH": { "d": 9, "r": 61, "i": 0, "total": 70 }
+    "_name": "Idaho",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 0,
+      "r": 2,
+      "i": 0,
+      "total": 2
+    },
+    "SS": {
+      "d": 6,
+      "r": 29,
+      "i": 0,
+      "total": 35
+    },
+    "SH": {
+      "d": 9,
+      "r": 61,
+      "i": 0,
+      "total": 70
+    }
   },
-
   "IL": {
-    "_name": "Illinois", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 14, "r": 3,  "i": 0, "total": 17  },
-    "SS": { "d": 40, "r": 19, "i": 0, "total": 59  },
-    "SH": { "d": 78, "r": 40, "i": 0, "total": 118 }
+    "_name": "Illinois",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 14,
+      "r": 3,
+      "i": 0,
+      "total": 17
+    },
+    "SS": {
+      "d": 40,
+      "r": 19,
+      "i": 0,
+      "total": 59,
+      "hd": 17,
+      "hr": 3,
+      "hi": 0
+    },
+    "SH": {
+      "d": 78,
+      "r": 40,
+      "i": 0,
+      "total": 118
+    }
   },
-
   "IN": {
-    "_name": "Indiana", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 2,  "r": 7,  "i": 0, "total": 9   },
-    "SS": { "d": 10, "r": 40, "i": 0, "total": 50  },
-    "SH": { "d": 30, "r": 70, "i": 0, "total": 100 }
+    "_name": "Indiana",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 2,
+      "r": 7,
+      "i": 0,
+      "total": 9
+    },
+    "SS": {
+      "d": 10,
+      "r": 40,
+      "i": 0,
+      "total": 50,
+      "hd": 7,
+      "hr": 18,
+      "hi": 0
+    },
+    "SH": {
+      "d": 30,
+      "r": 70,
+      "i": 0,
+      "total": 100
+    }
   },
-
   "IA": {
-    "_name": "Iowa", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 0,  "r": 4,  "i": 0, "total": 4   },
-    "SS": { "d": 16, "r": 34, "i": 0, "total": 50  },
-    "SH": { "d": 33, "r": 67, "i": 0, "total": 100 }
+    "_name": "Iowa",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 0,
+      "r": 4,
+      "i": 0,
+      "total": 4
+    },
+    "SS": {
+      "d": 16,
+      "r": 34,
+      "i": 0,
+      "total": 50,
+      "hd": 5,
+      "hr": 20,
+      "hi": 0
+    },
+    "SH": {
+      "d": 33,
+      "r": 67,
+      "i": 0,
+      "total": 100
+    }
   },
-
   "KS": {
-    "_name": "Kansas", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 1, "r": 3,  "i": 0, "total": 4   },
-    "SS": { "d": 9, "r": 31, "i": 0, "total": 40  },
-    "SH": { "d": 37,"r": 88, "i": 0, "total": 125 }
+    "_name": "Kansas",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 1,
+      "r": 3,
+      "i": 0,
+      "total": 4
+    },
+    "SS": {
+      "d": 9,
+      "r": 31,
+      "i": 0,
+      "total": 40
+    },
+    "SH": {
+      "d": 37,
+      "r": 88,
+      "i": 0,
+      "total": 125
+    }
   },
-
   "KY": {
-    "_name": "Kentucky", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 1,  "r": 5,  "i": 0, "total": 6   },
-    "SS": { "d": 7,  "r": 31, "i": 0, "total": 38  },
-    "SH": { "d": 20, "r": 80, "i": 0, "total": 100 }
+    "_name": "Kentucky",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 1,
+      "r": 5,
+      "i": 0,
+      "total": 6
+    },
+    "SS": {
+      "d": 7,
+      "r": 31,
+      "i": 0,
+      "total": 38,
+      "hd": 5,
+      "hr": 14,
+      "hi": 0
+    },
+    "SH": {
+      "d": 20,
+      "r": 80,
+      "i": 0,
+      "total": 100
+    }
   },
-
   "LA": {
-    "_name": "Louisiana", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 2,  "r": 4,  "i": 0, "total": 6   },
-    "SS": { "d": 10, "r": 27, "i": 0, "total": 39  },
-    "SH": { "d": 32, "r": 73, "i": 0, "total": 105 }
+    "_name": "Louisiana",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 2,
+      "r": 4,
+      "i": 0,
+      "total": 6
+    },
+    "SS": {
+      "d": 10,
+      "r": 27,
+      "i": 0,
+      "total": 39
+    },
+    "SH": {
+      "d": 32,
+      "r": 73,
+      "i": 0,
+      "total": 105,
+      "hd": 32,
+      "hr": 73,
+      "hi": 0
+    }
   },
-
   "ME": {
-    "_name": "Maine", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 2,  "r": 0,  "i": 0, "total": 2   },
-    "SS": { "d": 20, "r": 15, "i": 0, "total": 35  },
-    "SH": { "d": 75, "r": 73, "i": 2, "total": 151 }
+    "_name": "Maine",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 2,
+      "r": 0,
+      "i": 0,
+      "total": 2
+    },
+    "SS": {
+      "d": 20,
+      "r": 15,
+      "i": 0,
+      "total": 35
+    },
+    "SH": {
+      "d": 75,
+      "r": 73,
+      "i": 2,
+      "total": 151
+    }
   },
-
   "MD": {
-    "_name": "Maryland", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 7,   "r": 1,  "i": 0, "total": 8   },
-    "SS": { "d": 33,  "r": 13, "i": 0, "total": 47  },
-    "SH": { "d": 100, "r": 39, "i": 0, "total": 141 }
+    "_name": "Maryland",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 7,
+      "r": 1,
+      "i": 0,
+      "total": 8
+    },
+    "SS": {
+      "d": 33,
+      "r": 13,
+      "i": 0,
+      "total": 47
+    },
+    "SH": {
+      "d": 100,
+      "r": 39,
+      "i": 0,
+      "total": 141
+    }
   },
-
   "MA": {
-    "_name": "Massachusetts", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 9,   "r": 0,  "i": 0, "total": 9   },
-    "SS": { "d": 35,  "r": 5,  "i": 0, "total": 40  },
-    "SH": { "d": 133, "r": 25, "i": 1, "total": 160 }
+    "_name": "Massachusetts",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 9,
+      "r": 0,
+      "i": 0,
+      "total": 9
+    },
+    "SS": {
+      "d": 35,
+      "r": 5,
+      "i": 0,
+      "total": 40
+    },
+    "SH": {
+      "d": 133,
+      "r": 25,
+      "i": 1,
+      "total": 160
+    }
   },
-
   "MI": {
-    "_name": "Michigan", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 6,  "r": 7,  "i": 0, "total": 13  },
-    "SS": { "d": 19, "r": 18, "i": 0, "total": 38  },
-    "SH": { "d": 52, "r": 58, "i": 0, "total": 110 }
+    "_name": "Michigan",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 6,
+      "r": 7,
+      "i": 0,
+      "total": 13
+    },
+    "SS": {
+      "d": 19,
+      "r": 18,
+      "i": 0,
+      "total": 38
+    },
+    "SH": {
+      "d": 52,
+      "r": 58,
+      "i": 0,
+      "total": 110
+    }
   },
-
   "MN": {
-    "_name": "Minnesota", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "_name": "Minnesota",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
     "_note": "House tied 67D-67R under power-sharing agreement",
-    "CD": { "d": 4,  "r": 4,  "i": 0, "total": 8   },
-    "SS": { "d": 34, "r": 33, "i": 0, "total": 67  },
-    "SH": { "d": 66, "r": 67, "i": 0, "total": 134 }
+    "CD": {
+      "d": 4,
+      "r": 4,
+      "i": 0,
+      "total": 8
+    },
+    "SS": {
+      "d": 34,
+      "r": 33,
+      "i": 0,
+      "total": 67
+    },
+    "SH": {
+      "d": 66,
+      "r": 67,
+      "i": 0,
+      "total": 134
+    }
   },
-
   "MS": {
-    "_name": "Mississippi", "_updated": "2025-11-05", "_source": "NCSL / Ballotpedia — reflects Nov 2025 special election results",
-    "CD": { "d": 1,  "r": 3,  "i": 0, "total": 4   },
-    "SS": { "d": 18, "r": 34, "i": 0, "total": 52  },
-    "SH": { "d": 42, "r": 78, "i": 2, "total": 122 }
+    "_name": "Mississippi",
+    "_updated": "2025-11-05",
+    "_source": "NCSL / Ballotpedia \u2014 reflects Nov 2025 special election results",
+    "CD": {
+      "d": 1,
+      "r": 3,
+      "i": 0,
+      "total": 4
+    },
+    "SS": {
+      "d": 18,
+      "r": 34,
+      "i": 0,
+      "total": 52
+    },
+    "SH": {
+      "d": 42,
+      "r": 78,
+      "i": 2,
+      "total": 122,
+      "hd": 42,
+      "hr": 78,
+      "hi": 2
+    }
   },
-
   "MO": {
-    "_name": "Missouri", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 2,  "r": 6,   "i": 0, "total": 8   },
-    "SS": { "d": 10, "r": 24,  "i": 0, "total": 34  },
-    "SH": { "d": 52, "r": 110, "i": 0, "total": 163 }
+    "_name": "Missouri",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 2,
+      "r": 6,
+      "i": 0,
+      "total": 8
+    },
+    "SS": {
+      "d": 10,
+      "r": 24,
+      "i": 0,
+      "total": 34,
+      "hd": 8,
+      "hr": 9,
+      "hi": 0
+    },
+    "SH": {
+      "d": 52,
+      "r": 110,
+      "i": 0,
+      "total": 163
+    }
   },
-
   "MT": {
-    "_name": "Montana", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 0,  "r": 2,  "i": 0, "total": 2   },
-    "SS": { "d": 18, "r": 32, "i": 0, "total": 50  },
-    "SH": { "d": 42, "r": 58, "i": 0, "total": 100 }
+    "_name": "Montana",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 0,
+      "r": 2,
+      "i": 0,
+      "total": 2
+    },
+    "SS": {
+      "d": 18,
+      "r": 32,
+      "i": 0,
+      "total": 50,
+      "hd": 7,
+      "hr": 18,
+      "hi": 0
+    },
+    "SH": {
+      "d": 42,
+      "r": 58,
+      "i": 0,
+      "total": 100
+    }
   },
-
   "NE": {
-    "_name": "Nebraska", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "_name": "Nebraska",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
     "_note": "Unicameral nonpartisan legislature. SS contains all 49 seats. SH is null. Members run without party labels but most are affiliated.",
-    "CD": { "d": 0,  "r": 3,  "i": 0, "total": 3 },
-    "SS": { "d": 0,  "r": 0,  "i": 49,"total": 49 },
+    "CD": {
+      "d": 0,
+      "r": 3,
+      "i": 0,
+      "total": 3
+    },
+    "SS": {
+      "d": 0,
+      "r": 0,
+      "i": 49,
+      "total": 49,
+      "hd": 9,
+      "hr": 14,
+      "hi": 0
+    },
     "SH": null
   },
-
   "NV": {
-    "_name": "Nevada", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 3,  "r": 1,  "i": 0, "total": 4  },
-    "SS": { "d": 13, "r": 8,  "i": 0, "total": 21 },
-    "SH": { "d": 27, "r": 15, "i": 0, "total": 42 }
+    "_name": "Nevada",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 3,
+      "r": 1,
+      "i": 0,
+      "total": 4
+    },
+    "SS": {
+      "d": 13,
+      "r": 8,
+      "i": 0,
+      "total": 21,
+      "hd": 6,
+      "hr": 4,
+      "hi": 0
+    },
+    "SH": {
+      "d": 27,
+      "r": 15,
+      "i": 0,
+      "total": 42
+    }
   },
-
   "NH": {
-    "_name": "New Hampshire", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 2,   "r": 0,   "i": 0, "total": 2   },
-    "SS": { "d": 8,   "r": 16,  "i": 0, "total": 24  },
-    "SH": { "d": 177, "r": 221, "i": 1, "total": 400 }
+    "_name": "New Hampshire",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 2,
+      "r": 0,
+      "i": 0,
+      "total": 2
+    },
+    "SS": {
+      "d": 8,
+      "r": 16,
+      "i": 0,
+      "total": 24
+    },
+    "SH": {
+      "d": 177,
+      "r": 221,
+      "i": 1,
+      "total": 400
+    }
   },
-
   "NJ": {
-    "_name": "New Jersey", "_updated": "2026-02-02", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "_name": "New Jersey",
+    "_updated": "2026-02-02",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
     "_note": "CD-11 vacant (Sherrill resignation Nov 2025). Total 12 seats, 1 vacant.",
-    "CD": { "d": 8,  "r": 3,  "i": 0, "total": 12 },
-    "SS": { "d": 25, "r": 15, "i": 0, "total": 40 },
-    "SH": { "d": 52, "r": 28, "i": 0, "total": 80 }
+    "CD": {
+      "d": 8,
+      "r": 3,
+      "i": 0,
+      "total": 12
+    },
+    "SS": {
+      "d": 25,
+      "r": 15,
+      "i": 0,
+      "total": 40
+    },
+    "SH": {
+      "d": 52,
+      "r": 28,
+      "i": 0,
+      "total": 80,
+      "hd": 57,
+      "hr": 23,
+      "hi": 0
+    }
   },
-
   "NM": {
-    "_name": "New Mexico", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 3,  "r": 0,  "i": 0, "total": 3  },
-    "SS": { "d": 26, "r": 16, "i": 0, "total": 42 },
-    "SH": { "d": 43, "r": 26, "i": 0, "total": 70 }
+    "_name": "New Mexico",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 3,
+      "r": 0,
+      "i": 0,
+      "total": 3
+    },
+    "SS": {
+      "d": 26,
+      "r": 16,
+      "i": 0,
+      "total": 42
+    },
+    "SH": {
+      "d": 43,
+      "r": 26,
+      "i": 0,
+      "total": 70
+    }
   },
-
   "NY": {
-    "_name": "New York", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 19,  "r": 7,  "i": 0, "total": 26  },
-    "SS": { "d": 41,  "r": 22, "i": 0, "total": 63  },
-    "SH": { "d": 103, "r": 47, "i": 0, "total": 150 }
+    "_name": "New York",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 19,
+      "r": 7,
+      "i": 0,
+      "total": 26
+    },
+    "SS": {
+      "d": 41,
+      "r": 22,
+      "i": 0,
+      "total": 63
+    },
+    "SH": {
+      "d": 103,
+      "r": 47,
+      "i": 0,
+      "total": 150
+    }
   },
-
   "NC": {
-    "_name": "North Carolina", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 4,  "r": 10, "i": 0, "total": 14  },
-    "SS": { "d": 20, "r": 30, "i": 0, "total": 50  },
-    "SH": { "d": 49, "r": 71, "i": 0, "total": 120 }
+    "_name": "North Carolina",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 4,
+      "r": 10,
+      "i": 0,
+      "total": 14
+    },
+    "SS": {
+      "d": 20,
+      "r": 30,
+      "i": 0,
+      "total": 50
+    },
+    "SH": {
+      "d": 49,
+      "r": 71,
+      "i": 0,
+      "total": 120
+    }
   },
-
   "ND": {
-    "_name": "North Dakota", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 0, "r": 1,  "i": 0, "total": 1  },
-    "SS": { "d": 5, "r": 42, "i": 0, "total": 47 },
-    "SH": { "d": 11,"r": 83, "i": 0, "total": 94 }
+    "_name": "North Dakota",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 0,
+      "r": 1,
+      "i": 0,
+      "total": 1
+    },
+    "SS": {
+      "d": 5,
+      "r": 42,
+      "i": 0,
+      "total": 47,
+      "hd": 2,
+      "hr": 21,
+      "hi": 0
+    },
+    "SH": {
+      "d": 11,
+      "r": 83,
+      "i": 0,
+      "total": 94,
+      "hd": 3,
+      "hr": 43,
+      "hi": 0
+    }
   },
-
   "OH": {
-    "_name": "Ohio", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 5,  "r": 10, "i": 0, "total": 15 },
-    "SS": { "d": 9,  "r": 24, "i": 0, "total": 33 },
-    "SH": { "d": 34, "r": 65, "i": 0, "total": 99 }
+    "_name": "Ohio",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 5,
+      "r": 10,
+      "i": 0,
+      "total": 15
+    },
+    "SS": {
+      "d": 9,
+      "r": 24,
+      "i": 0,
+      "total": 33,
+      "hd": 4,
+      "hr": 12,
+      "hi": 0
+    },
+    "SH": {
+      "d": 34,
+      "r": 65,
+      "i": 0,
+      "total": 99
+    }
   },
-
   "OK": {
-    "_name": "Oklahoma", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 0,  "r": 5,  "i": 0, "total": 5   },
-    "SS": { "d": 8,  "r": 39, "i": 0, "total": 48  },
-    "SH": { "d": 20, "r": 80, "i": 0, "total": 101 }
+    "_name": "Oklahoma",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 0,
+      "r": 5,
+      "i": 0,
+      "total": 5
+    },
+    "SS": {
+      "d": 8,
+      "r": 39,
+      "i": 0,
+      "total": 48,
+      "hd": 4,
+      "hr": 20,
+      "hi": 0
+    },
+    "SH": {
+      "d": 20,
+      "r": 80,
+      "i": 0,
+      "total": 101
+    }
   },
-
   "OR": {
-    "_name": "Oregon", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 5,  "r": 1,  "i": 0, "total": 6  },
-    "SS": { "d": 18, "r": 12, "i": 0, "total": 30 },
-    "SH": { "d": 36, "r": 24, "i": 0, "total": 60 }
+    "_name": "Oregon",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 5,
+      "r": 1,
+      "i": 0,
+      "total": 6
+    },
+    "SS": {
+      "d": 18,
+      "r": 12,
+      "i": 0,
+      "total": 30,
+      "hd": 7,
+      "hr": 8,
+      "hi": 0
+    },
+    "SH": {
+      "d": 36,
+      "r": 24,
+      "i": 0,
+      "total": 60
+    }
   },
-
   "PA": {
-    "_name": "Pennsylvania", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "_name": "Pennsylvania",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
     "_note": "House tied 101D-101R. Senate has 1 vacancy.",
-    "CD": { "d": 7,   "r": 10,  "i": 0, "total": 17  },
-    "SS": { "d": 22,  "r": 27,  "i": 0, "total": 50  },
-    "SH": { "d": 101, "r": 101, "i": 0, "total": 203 }
+    "CD": {
+      "d": 7,
+      "r": 10,
+      "i": 0,
+      "total": 17
+    },
+    "SS": {
+      "d": 22,
+      "r": 27,
+      "i": 0,
+      "total": 50,
+      "hd": 10,
+      "hr": 15,
+      "hi": 0
+    },
+    "SH": {
+      "d": 101,
+      "r": 101,
+      "i": 0,
+      "total": 203
+    }
   },
-
   "RI": {
-    "_name": "Rhode Island", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 2,  "r": 0,  "i": 0, "total": 2  },
-    "SS": { "d": 34, "r": 4,  "i": 0, "total": 38 },
-    "SH": { "d": 64, "r": 10, "i": 1, "total": 75 }
+    "_name": "Rhode Island",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 2,
+      "r": 0,
+      "i": 0,
+      "total": 2
+    },
+    "SS": {
+      "d": 34,
+      "r": 4,
+      "i": 0,
+      "total": 38
+    },
+    "SH": {
+      "d": 64,
+      "r": 10,
+      "i": 1,
+      "total": 75
+    }
   },
-
   "SC": {
-    "_name": "South Carolina", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 1,  "r": 6,  "i": 0, "total": 7   },
-    "SS": { "d": 12, "r": 34, "i": 0, "total": 46  },
-    "SH": { "d": 34, "r": 88, "i": 0, "total": 124 }
+    "_name": "South Carolina",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 1,
+      "r": 6,
+      "i": 0,
+      "total": 7
+    },
+    "SS": {
+      "d": 12,
+      "r": 34,
+      "i": 0,
+      "total": 46
+    },
+    "SH": {
+      "d": 34,
+      "r": 88,
+      "i": 0,
+      "total": 124
+    }
   },
-
   "SD": {
-    "_name": "South Dakota", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 0, "r": 1,  "i": 0, "total": 1  },
-    "SS": { "d": 4, "r": 31, "i": 0, "total": 35 },
-    "SH": { "d": 7, "r": 63, "i": 0, "total": 70 }
+    "_name": "South Dakota",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 0,
+      "r": 1,
+      "i": 0,
+      "total": 1
+    },
+    "SS": {
+      "d": 4,
+      "r": 31,
+      "i": 0,
+      "total": 35
+    },
+    "SH": {
+      "d": 7,
+      "r": 63,
+      "i": 0,
+      "total": 70
+    }
   },
-
   "TN": {
-    "_name": "Tennessee", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 1,  "r": 8,  "i": 0, "total": 9  },
-    "SS": { "d": 6,  "r": 27, "i": 0, "total": 33 },
-    "SH": { "d": 24, "r": 75, "i": 0, "total": 99 }
+    "_name": "Tennessee",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 1,
+      "r": 8,
+      "i": 0,
+      "total": 9
+    },
+    "SS": {
+      "d": 6,
+      "r": 27,
+      "i": 0,
+      "total": 33,
+      "hd": 2,
+      "hr": 14,
+      "hi": 0
+    },
+    "SH": {
+      "d": 24,
+      "r": 75,
+      "i": 0,
+      "total": 99
+    }
   },
-
   "TX": {
-    "_name": "Texas", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 13, "r": 25, "i": 0, "total": 38  },
-    "SS": { "d": 11, "r": 20, "i": 0, "total": 31  },
-    "SH": { "d": 62, "r": 88, "i": 0, "total": 150 }
+    "_name": "Texas",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 13,
+      "r": 25,
+      "i": 0,
+      "total": 38
+    },
+    "SS": {
+      "d": 11,
+      "r": 20,
+      "i": 0,
+      "total": 31,
+      "hd": 6,
+      "hr": 9,
+      "hi": 0
+    },
+    "SH": {
+      "d": 62,
+      "r": 88,
+      "i": 0,
+      "total": 150
+    }
   },
-
   "UT": {
-    "_name": "Utah", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 0,  "r": 4,  "i": 0, "total": 4  },
-    "SS": { "d": 6,  "r": 23, "i": 0, "total": 29 },
-    "SH": { "d": 14, "r": 61, "i": 0, "total": 75 }
+    "_name": "Utah",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 0,
+      "r": 4,
+      "i": 0,
+      "total": 4
+    },
+    "SS": {
+      "d": 6,
+      "r": 23,
+      "i": 0,
+      "total": 29,
+      "hd": 3,
+      "hr": 11,
+      "hi": 0
+    },
+    "SH": {
+      "d": 14,
+      "r": 61,
+      "i": 0,
+      "total": 75
+    }
   },
-
   "VT": {
-    "_name": "Vermont", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 1,  "r": 0,  "i": 0, "total": 1   },
-    "SS": { "d": 16, "r": 13, "i": 1, "total": 30  },
-    "SH": { "d": 87, "r": 56, "i": 7, "total": 150 }
+    "_name": "Vermont",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 1,
+      "r": 0,
+      "i": 0,
+      "total": 1
+    },
+    "SS": {
+      "d": 16,
+      "r": 13,
+      "i": 1,
+      "total": 30
+    },
+    "SH": {
+      "d": 87,
+      "r": 56,
+      "i": 7,
+      "total": 150
+    }
   },
-
   "VA": {
-    "_name": "Virginia", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 6,  "r": 5,  "i": 0, "total": 11  },
-    "SS": { "d": 21, "r": 19, "i": 0, "total": 40  },
-    "SH": { "d": 51, "r": 49, "i": 0, "total": 100 }
+    "_name": "Virginia",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 6,
+      "r": 5,
+      "i": 0,
+      "total": 11
+    },
+    "SS": {
+      "d": 21,
+      "r": 19,
+      "i": 0,
+      "total": 40
+    },
+    "SH": {
+      "d": 51,
+      "r": 49,
+      "i": 0,
+      "total": 100,
+      "hd": 64,
+      "hr": 36,
+      "hi": 0
+    }
   },
-
   "WA": {
-    "_name": "Washington", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 8,  "r": 2,  "i": 0, "total": 10 },
-    "SS": { "d": 30, "r": 19, "i": 0, "total": 49 },
-    "SH": { "d": 59, "r": 39, "i": 0, "total": 98 }
+    "_name": "Washington",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 8,
+      "r": 2,
+      "i": 0,
+      "total": 10
+    },
+    "SS": {
+      "d": 30,
+      "r": 19,
+      "i": 0,
+      "total": 49,
+      "hd": 15,
+      "hr": 10,
+      "hi": 0
+    },
+    "SH": {
+      "d": 59,
+      "r": 39,
+      "i": 0,
+      "total": 98
+    }
   },
-
   "WV": {
-    "_name": "West Virginia", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 0, "r": 2,  "i": 0, "total": 2   },
-    "SS": { "d": 2, "r": 32, "i": 0, "total": 34  },
-    "SH": { "d": 9, "r": 91, "i": 0, "total": 100 }
+    "_name": "West Virginia",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 0,
+      "r": 2,
+      "i": 0,
+      "total": 2
+    },
+    "SS": {
+      "d": 2,
+      "r": 32,
+      "i": 0,
+      "total": 34,
+      "hd": 1,
+      "hr": 16,
+      "hi": 0
+    },
+    "SH": {
+      "d": 9,
+      "r": 91,
+      "i": 0,
+      "total": 100
+    }
   },
-
   "WI": {
-    "_name": "Wisconsin", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 2,  "r": 6,  "i": 0, "total": 8  },
-    "SS": { "d": 15, "r": 18, "i": 0, "total": 33 },
-    "SH": { "d": 45, "r": 54, "i": 0, "total": 99 }
+    "_name": "Wisconsin",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 2,
+      "r": 6,
+      "i": 0,
+      "total": 8
+    },
+    "SS": {
+      "d": 15,
+      "r": 18,
+      "i": 0,
+      "total": 33,
+      "hd": 5,
+      "hr": 11,
+      "hi": 0
+    },
+    "SH": {
+      "d": 45,
+      "r": 54,
+      "i": 0,
+      "total": 99
+    }
   },
-
   "WY": {
-    "_name": "Wyoming", "_updated": "2025-01-31", "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
-    "CD": { "d": 0, "r": 1,  "i": 0, "total": 1  },
-    "SS": { "d": 2, "r": 29, "i": 0, "total": 31 },
-    "SH": { "d": 6, "r": 56, "i": 0, "total": 62 }
+    "_name": "Wyoming",
+    "_updated": "2025-01-31",
+    "_source": "NCSL Jan 2025 / Wikipedia Feb 2026",
+    "CD": {
+      "d": 0,
+      "r": 1,
+      "i": 0,
+      "total": 1
+    },
+    "SS": {
+      "d": 2,
+      "r": 29,
+      "i": 0,
+      "total": 31,
+      "hd": 1,
+      "hr": 14,
+      "hi": 0
+    },
+    "SH": {
+      "d": 6,
+      "r": 56,
+      "i": 0,
+      "total": 62
+    }
   }
 }
