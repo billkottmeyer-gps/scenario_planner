@@ -37,3 +37,6 @@ added data for PA
 ## 2026-04-02 18:20 UTC - billkottmeyer-gps
 Create process_data.yml
 
+## 2026-04-02 18:23 UTC - billkottmeyer-gps
+Add Pennsylvania data — AK, MS, PA all loaded, 183,919 total rows
+
