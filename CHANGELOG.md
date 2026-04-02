@@ -22,3 +22,6 @@ Fixes SS and SH elections to current up in 2026
 ## 2026-04-02 14:02 UTC - billkottmeyer-gps
 Wire elections_2026.json into composition scoreboard — only project contested seats
 
+## 2026-04-02 14:26 UTC - billkottmeyer-gps
+Add holdover D/R counts to composition.json — all staggered SS and SH chambers
+
