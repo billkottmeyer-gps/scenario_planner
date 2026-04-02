@@ -31,3 +31,6 @@ Fix composition scoreboard — holdovers + contested seats = correct projected t
 ## 2026-04-02 14:43 UTC - billkottmeyer-gps
 Fix statewide calculation — use CD only to prevent triple-counting
 
+## 2026-04-02 17:48 UTC - billkottmeyer-gps
+added data for PA
+
