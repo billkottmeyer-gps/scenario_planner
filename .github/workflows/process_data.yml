@@ -1,10 +1,10 @@
 name: Process TargetSmart Data
 
 on:
+  workflow_dispatch:
   push:
     paths:
-      - 'voter-model/data/raw/**.csv'
-
+      - 'voter-model/data/raw/**'
 jobs:
   process:
     runs-on: ubuntu-latest
