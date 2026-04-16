@@ -60,3 +60,6 @@ Fix push race condition
 ## 2026-04-16 17:03 UTC - billkottmeyer-gps
 Enable manual trigger
 
+## 2026-04-16 17:12 UTC - billkottmeyer-gps
+Update process_data.yml
+
