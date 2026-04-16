@@ -63,3 +63,6 @@ Enable manual trigger
 ## 2026-04-16 17:12 UTC - billkottmeyer-gps
 Update process_data.yml
 
+## 2026-04-16 17:25 UTC - billkottmeyer-gps
+Fix voter_model.json path
+
