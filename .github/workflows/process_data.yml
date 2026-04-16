@@ -30,7 +30,8 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add voter-model/voter_model.json
+          git add voter-model/src/data/voter_model.json
+      
           git diff --staged --quiet && exit 0
           git commit -m "Auto: regenerated voter_model.json from CSV exports"
           for i in 1 2 3 4 5; do
