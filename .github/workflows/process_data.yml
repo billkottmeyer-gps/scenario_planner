@@ -5,11 +5,14 @@ on:
   push:
     paths:
       - 'voter-model/data/raw/**'
+
+permissions:
+  contents: write
+
 jobs:
   process:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+  
     steps:
       - uses: actions/checkout@v4
 
