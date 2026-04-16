@@ -57,3 +57,6 @@ Adds CD level data for remaining states
 ## 2026-04-16 16:51 UTC - billkottmeyer-gps
 Fix push race condition
 
+## 2026-04-16 17:03 UTC - billkottmeyer-gps
+Enable manual trigger
+
